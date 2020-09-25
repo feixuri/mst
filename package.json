@@ -1,7 +1,7 @@
 {
   "name": "@uniswap/interface",
   "description": "Uniswap Interface",
-  "homepage": "https://feixuri.github.io/zhuq",
+  "homepage": "https://feixuri.github.io/mst",
   "private": true,
   "devDependencies": {
     "@ethersproject/experimental": "^5.0.1",

@@ -1,171 +1,176 @@
 import React from 'react'
+
 import styled from 'styled-components'
 
-const Div1 = styled.div`
-  display: grid;
-  grid-auto-rows: auto;
-  row-gap: 24px;
-  justify-items: center;
-  max-width: 640px;
-  width: 100%;
-  // background: ${({ theme }) => theme.bg1};
-  // box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04),
-  //   0px 24px 32px rgba(0, 0, 0, 0.01);
-  background:linear-gradient(45deg, rgb(255, 0, 0) 0%, rgb(255, 154, 0) 10%, rgb(208, 222, 33) 20%, rgb(79, 220, 74) 30%, rgb(63, 218, 216) 40%, rgb(47, 201, 226) 50%, rgb(28, 127, 238) 60%, rgb(95, 21, 242) 70%, rgb(186, 12, 248) 80%, rgb(251, 7, 217) 90%, rgb(255, 0, 0) 100%) 0% 0% / 300% 300%;
-  border-radius: 10px;
-  margin-bottom: 1rem;
-`
+import { StyledCard } from '../../components/Card'
+import CardContent from '../../components/CardContent'
+import CardButton from '../../components/CardButton'
+import Spacer from '../../components/Spacer'
+import EthereumLogo from '../../assets/images/ethereum-logo.png'
+import UsdtLogo from '../../assets/images/usdt-logo.png'
+// import AppBody from '../AppBody'
 
-const Div11 = styled.div`
+// import ListLogo from '../../components/ListLogo'
+export default function Pool() {
+  return (
+    <>
+      <StyledCards>
+        <StyledRow>
+          <StyledCardWrapper>
+            <StyledCard>
+              <CardContent>
+                <StyledContent>
+                  <StyledInfo>
+                    <StyledEthereumLogo src={EthereumLogo} size={'40px'} style={{}} />
+                  </StyledInfo>
+                  <StyledTitle>AR-ETH</StyledTitle>
+                  <StyledDetails>
+                    <StyledDetail>Arweave is a new blockchain storage platform designed to overcome the scalability, data availability, and cost issues that exist in blockchain data storage. </StyledDetail>
+                  </StyledDetails>
+                  <StyledInsight>
+                    <span>Start Time</span>
+                    <span>2020-09-04 15:08:09</span>
+                  </StyledInsight>
+                  <StyledInsight>
+                    <span>End Time</span>
+                    <span>2020-09-14 20:08:09</span>
+                  </StyledInsight>
+                  <Spacer/>
+                  <CardButton disabled={false} text={'Buy'} to={`/apply`}></CardButton>
+                </StyledContent>
+              </CardContent>
+            </StyledCard>
+          </StyledCardWrapper>
+          <Spacer />
+          <StyledCardWrapper>
+            <StyledCard>
+              <CardContent>
+                <StyledContent>
+                  <StyledInfo>
+                    <StyledEthereumLogo src={UsdtLogo} size={'40px'} style={{}} />
+                  </StyledInfo>
+                  <StyledTitle>RFUEL-USDT</StyledTitle>
+                  <StyledDetails>
+                    <StyledDetail>Rio DeFi is creating technological infrastructure for a new decentralized financial system powered by blockchains and smart contracts.</StyledDetail>
+                  </StyledDetails>
+                  <StyledInsight>
+                    <span>Start Time</span>
+                    <span>2020-09-04 15:08:09</span>
+                  </StyledInsight>
+                  <StyledInsight>
+                    <span>End Time</span>
+                    <span>2020-09-14 20:08:09</span>
+                  </StyledInsight>
+                  <Spacer/>
+                  <CardButton disabled={false} text={'Buy'} to={`/apply`}></CardButton>
+                </StyledContent>
+              </CardContent>
+            </StyledCard>
+          </StyledCardWrapper>
+          <Spacer />
+          <StyledCardWrapper>
+            <StyledCard>
+              <CardContent>
+                <StyledContent>
+                  <StyledInfo>
+                    <StyledEthereumLogo src={UsdtLogo} size={'40px'} style={{}} />
+                  </StyledInfo>
+                  <StyledTitle>RFUEL-USDT</StyledTitle>
+                  <StyledDetails>
+                    <StyledDetail>Rio DeFi is creating technological infrastructure for a new decentralized financial system powered by blockchains and smart contracts.</StyledDetail>
+                  </StyledDetails>
+                  <StyledInsight>
+                    <span>Start Time</span>
+                    <span>2020-09-04 15:08:09</span>
+                  </StyledInsight>
+                  <StyledInsight>
+                    <span>End Time</span>
+                    <span>2020-09-14 20:08:09</span>
+                  </StyledInsight>
+                  <Spacer/>
+                  <CardButton disabled={false} text={'Buy'} to={`/apply`}></CardButton>
+                </StyledContent>
+              </CardContent>
+            </StyledCard>
+          </StyledCardWrapper>
+        </StyledRow>
+      </StyledCards>
+      {/*<AppBody></AppBody>*/}
+    </>
+  )
+}
+
+const StyledInsight = styled.div`
+  margin-top: ${({ theme }) => theme.spacing[2]}px;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  border-radius: 8px;
+  color: #aa9584;
   width: 100%;
-  max-width: 720px;
-  display: grid;
-  grid-auto-rows: auto;
+  line-height: 20px;
+  font-size: 13px;
+  text-align: center;
 `
-const Div111 = styled.div`
+const StyledInfo = styled.div`
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 15px 10px;
-  width: 100%;
-  justify-self: center;
-`
-const Div1111 = styled.div`
-  display: grid;
-  grid-auto-rows: auto;
-  border-radius: 12px;
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-  opacity: 1;
-`
-const Div11111 = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 96px;
   gap: 0px;
   -webkit-box-align: center;
   align-items: center;
   padding: 1rem;
-  z-index: 1;
 `
-//
-// const Div111111 = styled.div`
-//   position: relative;
-//   display: flex;
-//   flex-direction: row;
-// `
-const Div111112 = styled.div`
-  box-sizing: border-box;
-  margin: 0px;
-  min-width: 0px;
-  font-weight: 600;
+const StyledEthereumLogo = styled.img<{ size: string }>`
+  width: ${({ size }) => size};
+  height: ${({ size }) => size};
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.075);
+  border-radius: 24px;
+`
+// color: ${({ theme }) => theme.grey500};
+const StyledDetail = styled.div`
+  color: #aa9584;
+`
+
+const StyledDetails = styled.div`
+  margin-top: ${({ theme }) => theme.spacing[2]}px;
+  font-size: 12px;
+`
+const StyledTitle = styled.h4`
+  color: ${({ theme }) => theme.grey600};
   font-size: 24px;
+  font-weight: 700;
+  margin: ${({ theme }) => theme.spacing[2]}px 0 0;
+  padding: 0;
 `
-const Div111113 = styled.button`
-  padding: 8px;
-  width: 100%;
-  font-weight: 500;
-  text-align: center;
-  border-radius: 8px;
-  outline: none;
-  border: 1px solid transparent;
-  text-decoration: none;
-  display: flex;
-  -webkit-box-pack: center;
-  justify-content: center;
-  flex-wrap: nowrap;
-  -webkit-box-align: center;
+const StyledCards = styled.div`
+  width: 900px;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`
+
+const StyledContent = styled.div`
   align-items: center;
-  cursor: pointer;
-  position: relative;
-  z-index: 1;
-  background-color: rgb(255, 0, 122);
-  color: white;
-`
-const Div11112 = styled.div`
   display: flex;
-  -webkit-box-pack: justify;
-  justify-content: space-between;
   flex-direction: column;
-  gap: 0px;
-  margin-right: 1rem;
-  margin-left: 1rem;
 `
 
-const Div111121 = styled.div`
-  box-sizing: border-box;
-  margin: 0px;
-  min-width: 0px;
-  width: 100%;
+const StyledRow = styled.div`
   display: flex;
-  padding-bottom: 10px;
-  -webkit-box-align: center;
-  align-items: center;
-  -webkit-box-pack: justify;
-  justify-content: space-between;
+  flex-flow: row wrap;
+  margin-bottom: ${({ theme }) => theme.spacing[4]}px;
+  @media (max-width: 768px) {
+    width: 100%;
+    flex-flow: column nowrap;
+    align-items: center;
+  }
 `
-
-const Div1111211 = styled.div`
-  box-sizing: border-box;
-  margin: 0px;
-  min-width: 0px;
-  font-weight: 500;
+const StyledCardWrapper = styled.div`
+  display: flex;
+  width: calc((900px - 24px * 2) / 3);
+  position: relative;
 `
-
-export default function Apply() {
-  return (
-    <>
-      <Div1>
-        <Div11>
-          <Div111>
-            <Div1111>
-              <Div11111>
-                <Div111112>huobi.fm</Div111112>
-                <Div111113>申购</Div111113>
-              </Div11111>
-              <Div11112>
-                <Div111121>
-                  <Div1111211> Time </Div1111211>
-                  <Div1111211> 50 Day</Div1111211>
-                </Div111121>
-                <Div111121>
-                  <Div1111211> Unit Price</Div1111211>
-                  <Div1111211> 2,000 ETH</Div1111211>
-                </Div111121>
-                <Div111121>
-                  <Div1111211> Remaining</Div1111211>
-                  <Div1111211> 1,000 T</Div1111211>
-                </Div111121>
-              </Div11112>
-            </Div1111>
-          </Div111>
-        </Div11>
-      </Div1>
-      <Div1>
-        <Div11>
-          <Div111>
-            <Div1111>
-              <Div11111>
-                <Div111112>canaan-creative.com</Div111112>
-                <Div111113>申购</Div111113>
-              </Div11111>
-              <Div11112>
-                <Div111121>
-                  <Div1111211> Time </Div1111211>
-                  <Div1111211> 60 Day</Div1111211>
-                </Div111121>
-                <Div111121>
-                  <Div1111211> Unit Price</Div1111211>
-                  <Div1111211> 2,000 ETH</Div1111211>
-                </Div111121>
-                <Div111121>
-                  <Div1111211> Remaining</Div1111211>
-                  <Div1111211> 1,000 T</Div1111211>
-                </Div111121>
-              </Div11112>
-            </Div1111>
-          </Div111>
-        </Div11>
-      </Div1>
-    </>
-  )
-}
+// const ParticipatingWrapper = styled.div`
+//   display: flex;
+//   width: 100%;
+//   position: relative;
+// `

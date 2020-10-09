@@ -1,123 +1,195 @@
-import React, { useContext, useMemo } from 'react'
-import { ThemeContext } from 'styled-components'
-import { Pair } from '@uniswap/sdk'
-import { Link } from 'react-router-dom'
-import { SwapPoolTabs } from '../../components/NavigationTabs'
+import React from 'react'
 
-import Question from '../../components/QuestionHelper'
-import FullPositionCard from '../../components/PositionCard'
-import { useUserHasLiquidityInAllTokens } from '../../data/V1'
-import { useTokenBalancesWithLoadingIndicator } from '../../state/wallet/hooks'
-import { StyledInternalLink, TYPE } from '../../theme'
-import { Text } from 'rebass'
-import { LightCard } from '../../components/Card'
-import { RowBetween } from '../../components/Row'
-import { ButtonPrimary, ButtonSecondary } from '../../components/Button'
-import { AutoColumn } from '../../components/Column'
+import styled from 'styled-components'
 
-import { useActiveWeb3React } from '../../hooks'
-import { usePairs } from '../../data/Reserves'
-import { toV2LiquidityToken, useTrackedTokenPairs } from '../../state/user/hooks'
-import AppBody from '../AppBody'
-import { Dots } from '../../components/swap/styleds'
+import { StyledCard } from '../../components/Card'
+import CardContent from '../../components/CardContent'
+import CardIcon from '../../components/CardIcon'
+import CardButton from '../../components/CardButton'
+import Spacer from '../../components/Spacer'
+import EthereumLogo from '../../assets/images/ethereum-logo.png'
+import UsdtLogo from '../../assets/images/usdt-logo.png'
+import GrinLogo from '../../assets/images/grin.png'
+// import AppBody from '../AppBody'
 
+// import ListLogo from '../../components/ListLogo'
 export default function Pool() {
-  const theme = useContext(ThemeContext)
-  const { account } = useActiveWeb3React()
-
-  // fetch the user's balances of all tracked V2 LP tokens
-  const trackedTokenPairs = useTrackedTokenPairs()
-  const tokenPairsWithLiquidityTokens = useMemo(
-    () => trackedTokenPairs.map(tokens => ({ liquidityToken: toV2LiquidityToken(tokens), tokens })),
-    [trackedTokenPairs]
-  )
-  const liquidityTokens = useMemo(() => tokenPairsWithLiquidityTokens.map(tpwlt => tpwlt.liquidityToken), [
-    tokenPairsWithLiquidityTokens
-  ])
-  const [v2PairsBalances, fetchingV2PairBalances] = useTokenBalancesWithLoadingIndicator(
-    account ?? undefined,
-    liquidityTokens
-  )
-
-  // fetch the reserves for all V2 pools in which the user has a balance
-  const liquidityTokensWithBalances = useMemo(
-    () =>
-      tokenPairsWithLiquidityTokens.filter(({ liquidityToken }) =>
-        v2PairsBalances[liquidityToken.address]?.greaterThan('0')
-      ),
-    [tokenPairsWithLiquidityTokens, v2PairsBalances]
-  )
-
-  const v2Pairs = usePairs(liquidityTokensWithBalances.map(({ tokens }) => tokens))
-  const v2IsLoading =
-    fetchingV2PairBalances || v2Pairs?.length < liquidityTokensWithBalances.length || v2Pairs?.some(V2Pair => !V2Pair)
-
-  const allV2PairsWithLiquidity = v2Pairs.map(([, pair]) => pair).filter((v2Pair): v2Pair is Pair => Boolean(v2Pair))
-
-  const hasV1Liquidity = useUserHasLiquidityInAllTokens()
-
   return (
     <>
-      <AppBody>
-        <SwapPoolTabs active={'pool'} />
-        <AutoColumn gap="lg" justify="center">
-          <ButtonPrimary id="join-pool-button" as={Link} style={{ padding: 16 }} to="/add/ETH">
-            <Text fontWeight={500} fontSize={20}>
-              Add Liquidity
-            </Text>
-          </ButtonPrimary>
-
-          <AutoColumn gap="12px" style={{ width: '100%' }}>
-            <RowBetween padding={'0 8px'}>
-              <Text color={theme.text1} fontWeight={500}>
-                Your Liquidity
-              </Text>
-              <Question text="When you add liquidity, you are given pool tokens that represent your share. If you don’t see a pool you joined in this list, try importing a pool below." />
-            </RowBetween>
-
-            {!account ? (
-              <LightCard padding="40px">
-                <TYPE.body color={theme.text3} textAlign="center">
-                  Connect to a wallet to view your liquidity.
-                </TYPE.body>
-              </LightCard>
-            ) : v2IsLoading ? (
-              <LightCard padding="40px">
-                <TYPE.body color={theme.text3} textAlign="center">
-                  <Dots>Loading</Dots>
-                </TYPE.body>
-              </LightCard>
-            ) : allV2PairsWithLiquidity?.length > 0 ? (
-              <>
-                {allV2PairsWithLiquidity.map(v2Pair => (
-                  <FullPositionCard key={v2Pair.liquidityToken.address} pair={v2Pair} />
-                ))}
-              </>
-            ) : (
-              <LightCard padding="40px">
-                <TYPE.body color={theme.text3} textAlign="center">
-                  No liquidity found.
-                </TYPE.body>
-              </LightCard>
-            )}
-
-            <div>
-              <Text textAlign="center" fontSize={14} style={{ padding: '.5rem 0 .5rem 0' }}>
-                {hasV1Liquidity ? 'Uniswap V1 liquidity found!' : "Don't see a pool you joined?"}{' '}
-                <StyledInternalLink id="import-pool-link" to={hasV1Liquidity ? '/migrate/v1' : '/find'}>
-                  {hasV1Liquidity ? 'Migrate now.' : 'Import it.'}
-                </StyledInternalLink>
-              </Text>
-            </div>
-          </AutoColumn>
-        </AutoColumn>
-      </AppBody>
-
-      <div style={{ display: 'flex', alignItems: 'center', marginTop: '1.5rem' }}>
-        <ButtonSecondary as={Link} style={{ width: 'initial' }} to="/migrate/v1">
-          Migrate V1 Liquidity
-        </ButtonSecondary>
-      </div>
+      <StyledCards>
+        <StyledRow>
+          <StyledCardWrapper>
+            <StyledCard>
+              <CardContent>
+                <StyledContent>
+                  <CardIcon><StyledEthereumLogo src={EthereumLogo} size={'40px'} style={{}}/></CardIcon>
+                  <StyledTitle>ETH</StyledTitle>
+                  <StyledDetails>
+                    <StyledDetail>Deposit ETH</StyledDetail>
+                    <StyledDetail>Earn MST</StyledDetail>
+                  </StyledDetails>
+                  <Spacer/>
+                  <CardButton disabled={false} text={'Select'} to={`/liquidityMining`}></CardButton>
+                </StyledContent>
+              </CardContent>
+            </StyledCard>
+          </StyledCardWrapper>
+          <Spacer/>
+          <StyledCardWrapper>
+            <StyledCard>
+              <CardContent>
+                <StyledContent>
+                  <CardIcon><StyledEthereumLogo src={UsdtLogo} size={'40px'} style={{}}/></CardIcon>
+                  {/*<ListLogo style={{ marginRight: '1rem' }} logoURI={'https://raw.githubusercontent.com/compound-finance/token-list/master/assets/asset_USDT.svg'} alt={`usdt logo`} />*/}
+                  <StyledTitle>USDT</StyledTitle>
+                  <StyledDetails>
+                    <StyledDetail>Deposit USDT</StyledDetail>
+                    <StyledDetail>Earn MST</StyledDetail>
+                  </StyledDetails>
+                  <Spacer/>
+                  <CardButton disabled={true} text={'Select'} to={`/liquidityMining`}></CardButton>
+                </StyledContent>
+              </CardContent>
+            </StyledCard>
+          </StyledCardWrapper>
+          <Spacer/>
+          <StyledCardWrapper>
+            <StyledCard>
+              <CardContent>
+                <StyledContent>
+                  {/*<CardIcon>🍣</CardIcon>*/}
+                  <CardIcon><StyledEthereumLogo src={GrinLogo} size={'40px'} style={{}}/></CardIcon>
+                  <StyledTitle>WGRIN</StyledTitle>
+                  <StyledDetails>
+                    <StyledDetail>Deposit WGRIN</StyledDetail>
+                    <StyledDetail>Earn MST</StyledDetail>
+                  </StyledDetails>
+                  <Spacer/>
+                  <CardButton disabled={true} text={'Select'} to={`/liquidityMining`}></CardButton>
+                </StyledContent>
+              </CardContent>
+            </StyledCard>
+          </StyledCardWrapper>
+        </StyledRow>
+        <StyledRow>
+          <StyledCardWrapper>
+            <StyledCard>
+              <CardContent>
+                <StyledContent>
+                  <StyledInfo>
+                    <StyledEthereumLogo src={EthereumLogo} size={'40px'} style={{}} />
+                    <StyledEthereumLogo src={UsdtLogo} size={'40px'} style={{}} />
+                  </StyledInfo>
+                  <StyledTitle>MST-ETH</StyledTitle>
+                  <StyledInsight>
+                    <span> Total deposited</span>
+                    <span>$519,942,513</span>
+                  </StyledInsight>
+                  <Spacer/>
+                  <CardButton disabled={false} text={'Deposit'} to={`/liquidityMining`}></CardButton>
+                </StyledContent>
+              </CardContent>
+            </StyledCard>
+          </StyledCardWrapper>
+          <Spacer />
+          <StyledCardWrapper>
+            <StyledCard>
+              <CardContent>
+                <StyledContent>
+                  <StyledInfo>
+                    <StyledEthereumLogo src={EthereumLogo} size={'40px'} style={{}}/>
+                    <StyledEthereumLogo src={UsdtLogo} size={'40px'} style={{}}/>
+                  </StyledInfo>
+                  <StyledTitle>MST-USDT</StyledTitle>
+                  <StyledInsight>
+                    <span> Total deposited</span>
+                    <span>$519,942,513</span>
+                  </StyledInsight>
+                  <Spacer/>
+                  <CardButton disabled={false} text={'Deposit'} to={`/liquidityMining`}></CardButton>
+                </StyledContent>
+              </CardContent>
+            </StyledCard>
+          </StyledCardWrapper>
+        </StyledRow>
+      </StyledCards>
+      {/*<AppBody></AppBody>*/}
     </>
   )
 }
+
+const StyledInsight = styled.div`
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  border-radius: 8px;
+  color: #aa9584;
+  width: 100%;
+  margin-top: 12px;
+  line-height: 32px;
+  font-size: 13px;
+  text-align: center;
+  padding: 0 12px;
+`
+const StyledInfo = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0px;
+  -webkit-box-align: center;
+  align-items: center;
+  padding: 1rem;
+`
+const StyledEthereumLogo = styled.img<{ size: string }>`
+  width: ${({ size }) => size};
+  height: ${({ size }) => size};
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.075);
+  border-radius: 24px;
+`
+const StyledDetail = styled.div`
+  color: ${({ theme }) => theme.grey500};
+`
+
+const StyledDetails = styled.div`
+  margin-top: ${({ theme }) => theme.spacing[2]}px;
+  text-align: center;
+`
+const StyledTitle = styled.h4`
+  color: ${({ theme }) => theme.grey600};
+  font-size: 24px;
+  font-weight: 700;
+  margin: ${({ theme }) => theme.spacing[2]}px 0 0;
+  padding: 0;
+`
+const StyledCards = styled.div`
+  width: 900px;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`
+
+const StyledContent = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+`
+
+const StyledRow = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  margin-bottom: ${({ theme }) => theme.spacing[4]}px;
+  @media (max-width: 768px) {
+    width: 100%;
+    flex-flow: column nowrap;
+    align-items: center;
+  }
+`
+const StyledCardWrapper = styled.div`
+  display: flex;
+  width: calc((900px - 24px * 2) / 3);
+  position: relative;
+`
+// const ParticipatingWrapper = styled.div`
+//   display: flex;
+//   width: 100%;
+//   position: relative;
+// `

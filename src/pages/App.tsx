@@ -3,7 +3,7 @@ import { HashRouter, Route, Switch } from 'react-router-dom'
 import styled from 'styled-components'
 import GoogleAnalyticsReporter from '../components/analytics/GoogleAnalyticsReporter'
 import Header from '../components/Header'
-import Popups from '../components/Popups'
+// import Popups from '../components/Popups'
 import Web3ReactManager from '../components/Web3ReactManager'
 import DarkModeQueryParamReader from '../theme/DarkModeQueryParamReader'
 import AddLiquidity from './AddLiquidity'
@@ -18,6 +18,8 @@ import RemoveV1Exchange from './MigrateV1/RemoveV1Exchange'
 import Pool from './Pool'
 import LiquidityMining from './LiquidityMining'
 import Apply from './Apply'
+import Issue from './Issue'
+import { ApplyDetails } from './Apply/applydetails'
 import Home from './Home'
 import PoolFinder from './PoolFinder'
 import RemoveLiquidity from './RemoveLiquidity'
@@ -71,7 +73,7 @@ export default function App() {
             <Header />
           </HeaderWrapper>
           <BodyWrapper>
-            <Popups />
+            {/*<Popups />*/}
             <Web3ReactManager>
               <Switch>
                 <Route exact strict path="/swap" component={Swap} />
@@ -81,6 +83,8 @@ export default function App() {
                 <Route exact strict path="/pool" component={Pool} />
                 <Route exact strict path="/liquidityMining" component={LiquidityMining} />
                 <Route exact strict path="/apply" component={Apply} />
+                <Route exact strict path="/issue" component={Issue} />
+                <Route exact strict path="/apply/:applyId" component={ApplyDetails} />
                 <Route exact strict path="/home" component={Home} />
                 <Route exact strict path="/create" component={RedirectToAddLiquidity} />
                 <Route exact path="/add" component={AddLiquidity} />

@@ -2,6 +2,8 @@
 
 // import AppBody from '../AppBody'
 import React from 'react'
+import PageHeader from '../../components/PageHeader'
+import chef from '../../assets/img/chef.png'
 // import { Wrapper } from '../../components/swap/styleds'
 // import { AutoColumn } from '../../components/Column'
 import styled from 'styled-components'
@@ -35,94 +37,6 @@ const Div11 = styled.div`
   display: grid;
   grid-auto-rows: auto;
 `
-// const Div111 = styled.div`
-//   display: grid;
-//   grid-template-columns: 1fr;
-//   gap: 15px 10px;
-//   width: 100%;
-//   justify-self: center;
-// `
-// const Div1111 = styled.div`
-//   display: grid;
-//   grid-auto-rows: auto;
-//   border-radius: 12px;
-//   width: 100%;
-//   overflow: hidden;
-//   position: relative;
-//   opacity: 1;
-// `
-// const Div11111 = styled.div`
-//   display: grid;
-//   grid-template-columns: 1fr 96px;
-//   gap: 0px;
-//   -webkit-box-align: center;
-//   align-items: center;
-//   padding: 1rem;
-//   z-index: 1;
-// `
-//
-// const Div111111 = styled.div`
-//   position: relative;
-//   display: flex;
-//   flex-direction: row;
-// `
-// const Div111112 = styled.div`
-//   box-sizing: border-box;
-//   margin: 0px;
-//   min-width: 0px;
-//   font-weight: 600;
-//   font-size: 24px;
-// `
-// const Div111113 = styled.button`
-//   padding: 8px;
-//   width: 100%;
-//   font-weight: 500;
-//   text-align: center;
-//   border-radius: 8px;
-//   outline: none;
-//   border: 1px solid transparent;
-//   text-decoration: none;
-//   display: flex;
-//   -webkit-box-pack: center;
-//   justify-content: center;
-//   flex-wrap: nowrap;
-//   -webkit-box-align: center;
-//   align-items: center;
-//   cursor: pointer;
-//   position: relative;
-//   z-index: 1;
-//   background-color: rgb(255, 0, 122);
-//   color: white;
-// `
-// const Div11112 = styled.div`
-//   display: flex;
-//   -webkit-box-pack: justify;
-//   justify-content: space-between;
-//   flex-direction: column;
-//   gap: 12px;
-//   margin-right: 1rem;
-//   margin-left: 1rem;
-// `
-//
-// const Div111121 = styled.div`
-//   box-sizing: border-box;
-//   margin: 0px;
-//   min-width: 0px;
-//   width: 100%;
-//   display: flex;
-//   padding-bottom: 12px;
-//   -webkit-box-align: center;
-//   align-items: center;
-//   -webkit-box-pack: justify;
-//   justify-content: space-between;
-// `
-//
-// const Div1111211 = styled.div`
-//   box-sizing: border-box;
-//   margin: 0px;
-//   min-width: 0px;
-//   font-weight: 500;
-// `
 
 const CardHome = styled.div`
   display: grid;
@@ -159,17 +73,27 @@ const FootnoteValue = styled.div`
 export default function Home() {
   return (
     <>
+      <PageHeader
+        icon={<img src={chef} height={120} alt="" />}
+        title="MasterChef is Ready"
+        subtitle="Stake MinerSwap LP tokens to claim your very own great MST!"
+      />
       <Container>
         <Balances />
       </Container>
+      <StyledInfo>
+        🏆<b>Pro Tip</b>: MST-ETH SLP token pool yields 10.0x more token rewards per block.
+      </StyledInfo>
       <Div1>
         <Div11>
           <CardHome>
             <BalCard>
+              <Label text="Your Earnings" />
               <Value value={'0.5'} />
               <Label text="WBTC" />
             </BalCard>
             <BalSumCard>
+              <Label text="Hash Token" />
               <Value value={'2,100'} />
               <Label text="HB.COM.BTC.30.01" />
             </BalSumCard>
@@ -184,10 +108,12 @@ export default function Home() {
         <Div11>
           <CardHome>
             <BalCard>
+              <Label text="Your Earnings" />
               <Value value={'80'} />
               <Label text="WBTC" />
             </BalCard>
             <BalSumCard>
+              <Label text="Hash Token" />
               <Value value={'9,100'} />
               <Label text="HB.COM.BTC.30.01" />
             </BalSumCard>
@@ -202,10 +128,12 @@ export default function Home() {
         <Div11>
           <CardHome>
             <BalCard>
+              <Label text="Your Earnings" />
               <Value value={'20.5'} />
               <Label text="WBTC" />
             </BalCard>
             <BalSumCard>
+              <Label text="Hash Token" />
               <Value value={'3,100'} />
               <Label text="HB.COM.BTC.30.01" />
             </BalSumCard>
@@ -219,3 +147,16 @@ export default function Home() {
     </>
   )
 }
+
+const StyledInfo = styled.h3`
+  color: ${({ theme }) => theme.grey500};
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+
+  > b {
+    color: ${({ theme }) => theme.grey600};
+  }
+`

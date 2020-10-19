@@ -5,7 +5,9 @@ import { Text } from 'rebass'
 
 import styled from 'styled-components'
 
-import Logo from '../../assets/svg/logo.svg'
+// import Logo from '../../assets/svg/logo.svg'
+// import Logo from '../../assets/svg/logo.svg'
+import Logo from '../../assets/img/chef.png'
 import LogoDark from '../../assets/svg/logo_white.svg'
 // import Wordmark from '../../assets/svg/wordmark.svg'
 // import WordmarkDark from '../../assets/svg/wordmark_white.svg'
@@ -60,13 +62,14 @@ const Title = styled.a`
   display: flex;
   align-items: center;
   pointer-events: auto;
-
+  text-decoration: none
   :hover {
     cursor: pointer;
   }
 `
 const TitleMenu = styled.div`
   box-sizing: border-box;
+  margin-left: 20px;
   margin: 0px;
   min-width: 0px;
   width: 100%;
@@ -174,6 +177,22 @@ const HeaderControls = styled.div`
     background-color: rgb(255, 255, 255);
   `};
 `
+const StyledText = styled.span`
+  width: 220px;
+  color: ${({ theme }) => theme.grey600};
+  font-family: 'Reem Kufi', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  margin-left: ${({ theme }) => theme.spacing[2]}px;
+  @media (max-width: 400px) {
+    display: none;
+  }
+`
+
+const MasterChefText = styled.span`
+  font-family: 'Kaushan Script', sans-serif;
+`
 
 const BalanceText = styled(Text)`
   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
@@ -201,17 +220,22 @@ export default function Header() {
         <HeaderElement>
           <Title href=".">
             <UniIcon>
-              <img src={isDark ? LogoDark : Logo} alt="logo" />
+              <img src={isDark ? LogoDark : Logo} alt="logo" height="32" style={{ marginTop: -4 }} />
             </UniIcon>
+            <StyledText>
+              MistSwap
+              <MasterChefText>HashChampion</MasterChefText>
+            </StyledText>
             {/*<TitleText>*/}
             {/*  <img style={{ marginLeft: '4px', marginTop: '4px' }} src={isDark ? WordmarkDark : Wordmark} alt="logo" />*/}
             {/*</TitleText>*/}
           </Title>
           <TitleMenu>
-            <TitleMenuText to="home">Home</TitleMenuText>
-            <TitleMenuText to="swap">Swap</TitleMenuText>
-            <TitleMenuText to="pool">Pool</TitleMenuText>
-            <TitleMenuText to="apply">Buy</TitleMenuText>
+            <TitleMenuText to="/home">Home</TitleMenuText>
+            <TitleMenuText to="/swap">Swap</TitleMenuText>
+            <TitleMenuText to="/pool">Pool</TitleMenuText>
+            <TitleMenuText to="/apply">Buy</TitleMenuText>
+            <TitleMenuText to="/issue">Issue</TitleMenuText>
           </TitleMenu>
         </HeaderElement>
         <HeaderControls>

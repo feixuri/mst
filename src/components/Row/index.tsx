@@ -13,7 +13,6 @@ const Row = styled(Box)<{ align?: string; padding?: string; border?: string; bor
 
 export const RowBetween = styled(Row)`
   justify-content: space-between;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 `
 
 export const RowFlat = styled.div`

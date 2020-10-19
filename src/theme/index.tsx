@@ -52,6 +52,7 @@ export function colors(darkMode: boolean): Colors {
     text3: darkMode ? '#6C7284' : '#888D9B',
     text4: darkMode ? '#565A69' : '#C3C5CB',
     text5: darkMode ? '#2C2F36' : '#EDEEF2',
+    text6: '#aa9584',
 
     // backgrounds / greys
     bg1: darkMode ? '#212429' : '#FFFFFF',
@@ -92,7 +93,6 @@ export function colors(darkMode: boolean): Colors {
   }
 }
 
-
 export function theme(darkMode: boolean): DefaultTheme {
   return {
     ...colors(darkMode),
@@ -102,6 +102,9 @@ export function theme(darkMode: boolean): DefaultTheme {
       md: 12,
       lg: 24
     },
+
+    siteWidth: 1200,
+
     spacing: {
       1: 4,
       2: 8,

@@ -230,6 +230,16 @@ export default function CurrencyInputPanel({
             </Aligner>
           </CurrencySelect>
         </InputRow>
+        <LabelRow>
+          <RowBetween style={{ paddingBottom: '10px' }}>
+            <TYPE.body color={theme.text2} fontWeight={500} fontSize={14}>
+              reserve ratio
+            </TYPE.body>
+            <TYPE.body color={theme.text2} fontWeight={500} fontSize={14}>
+              30%
+            </TYPE.body>
+          </RowBetween>
+        </LabelRow>
       </Container>
       {!disableCurrencySelect && onCurrencySelect && (
         <CurrencySearchModal

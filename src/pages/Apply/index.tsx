@@ -20,6 +20,9 @@ export default function Pool() {
             <StyledCard>
               <CardContent>
                 <StyledContent>
+                  <StyledDetails style={{ width: '100%', textAlign: 'right' }}>
+                    <StyledTime>End countdown:1D15H</StyledTime>
+                  </StyledDetails>
                   <StyledInfo>
                     <StyledEthereumLogo src={EthereumLogo} size={'40px'} style={{}} />
                   </StyledInfo>
@@ -36,7 +39,7 @@ export default function Pool() {
                     <span>2020-09-14 20:08:09</span>
                   </StyledInsight>
                   <Spacer/>
-                  <CardButton disabled={false} text={'Buy'} to={`/apply`}></CardButton>
+                  <CardButton disabled={false} text={'Buy'} to={`/apply/123456`}></CardButton>
                 </StyledContent>
               </CardContent>
             </StyledCard>
@@ -46,6 +49,9 @@ export default function Pool() {
             <StyledCard>
               <CardContent>
                 <StyledContent>
+                  <StyledDetails style={{ width: '100%', textAlign: 'right' }}>
+                    <StyledTime>End countdown:1D15H</StyledTime>
+                  </StyledDetails>
                   <StyledInfo>
                     <StyledEthereumLogo src={UsdtLogo} size={'40px'} style={{}} />
                   </StyledInfo>
@@ -62,7 +68,7 @@ export default function Pool() {
                     <span>2020-09-14 20:08:09</span>
                   </StyledInsight>
                   <Spacer/>
-                  <CardButton disabled={false} text={'Buy'} to={`/apply`}></CardButton>
+                  <CardButton disabled={false} text={'Buy'} to={`/apply/123456`}></CardButton>
                 </StyledContent>
               </CardContent>
             </StyledCard>
@@ -72,6 +78,9 @@ export default function Pool() {
             <StyledCard>
               <CardContent>
                 <StyledContent>
+                  <StyledDetails style={{ width: '100%', textAlign: 'right' }}>
+                    <StyledTime>End countdown:1D15H</StyledTime>
+                  </StyledDetails>
                   <StyledInfo>
                     <StyledEthereumLogo src={UsdtLogo} size={'40px'} style={{}} />
                   </StyledInfo>
@@ -88,7 +97,7 @@ export default function Pool() {
                     <span>2020-09-14 20:08:09</span>
                   </StyledInsight>
                   <Spacer/>
-                  <CardButton disabled={false} text={'Buy'} to={`/apply`}></CardButton>
+                  <CardButton disabled={false} text={'Buy'} to={`/apply/123456`}></CardButton>
                 </StyledContent>
               </CardContent>
             </StyledCard>
@@ -127,6 +136,9 @@ const StyledEthereumLogo = styled.img<{ size: string }>`
 `
 // color: ${({ theme }) => theme.grey500};
 const StyledDetail = styled.div`
+  color: #aa9584;
+`
+const StyledTime = styled.div`
   color: #aa9584;
 `
 

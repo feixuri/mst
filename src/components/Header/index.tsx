@@ -233,7 +233,7 @@ export default function Header() {
           <TitleMenu>
             <TitleMenuText to="/home">Home</TitleMenuText>
             <TitleMenuText to="/swap">Swap</TitleMenuText>
-            <TitleMenuText to="/pool">Pool</TitleMenuText>
+            {/*<TitleMenuText to="/pool">Pool</TitleMenuText>*/}
             <TitleMenuText to="/apply">Buy</TitleMenuText>
             <TitleMenuText to="/issue">Issue</TitleMenuText>
           </TitleMenu>

@@ -13,6 +13,7 @@ import { MULTICALL_ABI, MULTICALL_NETWORKS } from '../constants/multicall'
 import { V1_EXCHANGE_ABI, V1_FACTORY_ABI, V1_FACTORY_ADDRESSES } from '../constants/v1'
 import { getContract } from '../utils'
 import { useActiveWeb3React } from './index'
+import { abi as IssuerManagerV1ABI } from '../constants/abis/IssuerManagerV1.json'
 
 // returns null on errors
 function useContract(address: string | undefined, ABI: any, withSignerIfPossible = true): Contract | null {
@@ -40,6 +41,10 @@ export function useV2MigratorContract(): Contract | null {
 
 export function useV1ExchangeContract(address?: string, withSignerIfPossible?: boolean): Contract | null {
   return useContract(address, V1_EXCHANGE_ABI, withSignerIfPossible)
+}
+
+export function useIssuerManagerContract(address?: string, withSignerIfPossible?: boolean): Contract | null {
+  return useContract(address, IssuerManagerV1ABI, withSignerIfPossible)
 }
 
 export function useTokenContract(tokenAddress?: string, withSignerIfPossible?: boolean): Contract | null {

@@ -19,6 +19,9 @@ import Pool from './Pool'
 import LiquidityMining from './LiquidityMining'
 import Apply from './Apply'
 import Issue from './Issue'
+import { RegistIssuer } from './Issue/RegistIssuer'
+import { AddIssue } from './Issue/AddIssue'
+import { IssueList } from './Issue/IssueList'
 import { ApplyDetails } from './Apply/applydetails'
 import Home from './Home'
 import PoolFinder from './PoolFinder'
@@ -84,7 +87,10 @@ export default function App() {
                 <Route exact strict path="/liquidityMining" component={LiquidityMining} />
                 <Route exact strict path="/apply" component={Apply} />
                 <Route exact strict path="/issue" component={Issue} />
-                <Route exact strict path="/apply/:applyId" component={ApplyDetails} />
+                <Route exact strict path="/registIssuer" component={RegistIssuer} />
+                <Route exact strict path="/issues/:tokens/:hostname" component={IssueList} />
+                <Route exact strict path="/issue/:tokens/:hostname" component={AddIssue} />
+                <Route exact strict path="/apply/:token/:symbol" component={ApplyDetails} />
                 <Route exact strict path="/home" component={Home} />
                 <Route exact strict path="/create" component={RedirectToAddLiquidity} />
                 <Route exact path="/add" component={AddLiquidity} />

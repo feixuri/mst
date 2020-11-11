@@ -1,42 +1,309 @@
 import { RouteComponentProps } from 'react-router'
-import React, { useContext } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import AppBody from '../AppBody'
 import { AddRemoveTabs } from '../../components/NavigationTabs'
-import { Wrapper } from '../Pool/styleds'
-// import TransactionConfirmationModal, { ConfirmationModalContent } from '../../components/TransactionConfirmationModal'
+import { Dots, Wrapper } from '../Pool/styleds'
 import { AutoColumn, ColumnCenter } from '../../components/Column'
-import { ArrowWrapper, BottomGrouping } from '../../components/swap/styleds'
-// import { BlueCard, GreyCard, LightCard } from '../../components/Card'
-// import { TYPE } from '../../theme'
-// import CurrencyInputPanel from '../../components/CurrencyInputPanel'
-// import { Field } from '../../state/mint/actions'
-// import { Plus } from 'react-feather'
-// import { PairState } from '../../data/Reserves'
-// import { RowBetween } from '../../components/Row'
-// import { PoolPriceBar } from '../AddLiquidity/PoolPriceBar'
-// import { ButtonError, ButtonLight, ButtonPrimary } from '../../components/Button'
-import { ButtonError } from '../../components/Button'
+import { BottomGrouping } from '../../components/swap/styleds'
+import { ButtonError, ButtonPrimary } from '../../components/Button'
 import { Text } from 'rebass'
-import { AutoRow, RowBetween, RowFixed } from '../../components/Row'
-// import TradePrice from '../../components/swap/TradePrice'
-// import { INITIAL_ALLOWED_SLIPPAGE } from '../../constants'
-// import Card from '../../components/Card'
+import { RowBetween, RowFixed, RowFlat } from '../../components/Row'
 import styled, { ThemeContext } from 'styled-components'
 import { TYPE } from '../../theme'
 import EthereumLogo from '../../assets/images/ethereum-logo.png'
-import ApplyInputPanelProps from '../../components/ApplyInputPanel'
-// import { Field } from '../../state/swap/actions'
-import { ArrowDown } from 'react-feather'
-// import AddressInputPanel from '../../components/AddressInputPanel'
-// import Card from '../../components/Card'
-// import TradePrice from '../../components/swap/TradePrice'
-// import { INITIAL_ALLOWED_SLIPPAGE } from '../../constants'
-// import { TradeType } from '@uniswap/sdk'
-// import QuestionHelper from '../../components/QuestionHelper'
-// import { Field } from '../../state/swap/actions'
-// import { ApprovalState } from '../../hooks/useApproveCallback'
-// import { Text } from 'rebass'
-// import { MinimalPositionCard } from '../../components/PositionCard'
+import { NumericalInputPanel } from '../../components/CurrencyInputPanel'
+import { buyInput } from '../../state/issue/hooks'
+import { useIsExpertMode } from '../../state/user/hooks'
+import TransactionConfirmationModal, { ConfirmationModalContent } from '../../components/TransactionConfirmationModal'
+import { ConfirmRegisterModalBottom } from '../Issue/ConfirmRegisterModalBottom'
+import { LightCard } from '../../components/Card'
+import ReactGA from 'react-ga'
+import { getBtcMineTokenContract } from '../../utils'
+import { TransactionResponse } from '@ethersproject/abstract-provider'
+import { useWeb3React } from '@web3-react/core'
+import { formatUnits, parseUnits } from '@ethersproject/units'
+import Token from '../../components/IssuerCard/Token'
+import getMineToken, { MineToken } from '../../utils/getMineToken'
+import { useCurrency } from '../../hooks/Tokens'
+import { useCurrencyBalance } from '../../state/wallet/hooks'
+import { CurrencyAmount } from '@uniswap/sdk'
+import { tryParseAmount } from '../../state/swap/hooks'
+import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback'
+import { useTransactionAdder } from '../../state/transactions/hooks'
+export function ApplyDetails({
+  match: {
+    params: { token, symbol }
+  }
+}: RouteComponentProps<{ token: string,symbol:string }>) {
+  const { account, chainId, library } = useWeb3React()
+  const [buyAmount, setBuyAmount] = useState<string>('')
+  const expertMode = useIsExpertMode()
+  const [showConfirm, setShowConfirm] = useState<boolean>(false)
+  const [mineToken, setMineToken] = useState<MineToken>()
+  const [attemptingTxn, setAttemptingTxn] = useState<boolean>(false)
+  const [txHash, setTxHash] = useState<string>('')
+  const { inputError } = buyInput(buyAmount)
+  const isValid = !inputError
+  const onBuyAmount = useCallback((typedValue: string): void => {
+    setBuyAmount(typedValue)
+  }, [])
+  const currencyPay = useCurrency(mineToken ? (mineToken.usdt ? mineToken.usdt : 'ETH') : 'ETH')
+  const currencyPayBalance = useCurrencyBalance(account ?? undefined, currencyPay ?? undefined)
+  const independentAmount: CurrencyAmount | undefined = tryParseAmount(buyAmount, currencyPay ? currencyPay : undefined)
+  const addTransaction = useTransactionAdder()
+  useEffect(() => {
+    getMineToken(token, account, library).then(mineTokenInfo => {
+      setMineToken(mineTokenInfo)
+    })
+  }, [])
+  const [approvalA, approveACallback] = useApproveCallback(independentAmount, token)
+  async function onAdd() {
+    ReactGA.event({
+      category: 'Liquidity',
+      action: 'Add',
+      label: 'testlabel'
+    })
+    if (!chainId || !library || !account) return
+    const btcMineToken = getBtcMineTokenContract(token, library, account)
+
+    const buy = btcMineToken.buy
+    const args = [parseUnits(buyAmount, 18).toString()]
+    const value = null
+    setShowConfirm(true)
+    setAttemptingTxn(true)
+    await buy(...args, {
+      ...(value ? { value } : {}),
+      gasLimit: 5000000
+    })
+      .then((response: TransactionResponse) => {
+        setAttemptingTxn(false)
+        setTxHash(response.hash)
+
+        addTransaction(response, {
+          summary: 'Buy ' + symbol + ' Puy ' +
+            independentAmount?.toSignificant(3)
+        })
+        console.log(response)
+      })
+      .catch((error: { code: number }) => {
+        // setShowConfirm(true)
+        console.log(error)
+      })
+  }
+
+  const modalBottom = () => {
+    return <ConfirmRegisterModalBottom onAdd={onAdd} />
+  }
+  const pendingText = `Buy`
+  const handleDismissConfirmation = useCallback(() => {
+    setShowConfirm(false)
+    if (txHash) {
+    }
+    setTxHash('')
+  }, ['', txHash])
+
+  const modalHeader = () => {
+    return (
+      <AutoColumn gap="20px">
+        <LightCard mt="20px" borderRadius="20px">
+          <RowFlat>
+            <Text lineHeight="20px" marginRight={10}></Text>
+          </RowFlat>
+        </LightCard>
+      </AutoColumn>
+    )
+  }
+  const theme = useContext(ThemeContext)
+  return (
+    <>
+      <AppBody>
+        <AddRemoveTabs adding={true} />
+        <Wrapper>
+          <TransactionConfirmationModal
+            isOpen={showConfirm}
+            onDismiss={handleDismissConfirmation}
+            attemptingTxn={attemptingTxn}
+            hash={txHash}
+            content={() => (
+              <ConfirmationModalContent
+                title={'You are Buy'}
+                onDismiss={handleDismissConfirmation}
+                topContent={modalHeader}
+                bottomContent={modalBottom}
+              />
+            )}
+            pendingText={pendingText}
+          />
+          <AutoColumn gap="20px">
+            <ColumnCenter></ColumnCenter>
+            <StyledContent style={{ padding: '0 20px' }}>
+              <StyledInfo>
+                <StyledEthereumLogo src={EthereumLogo} size={'40px'} style={{}} />
+              </StyledInfo>
+              <StyledTitle>{symbol}</StyledTitle>
+              <StyledDetails>
+                <StyledDetail>{mineToken ? mineToken.comment : ''}</StyledDetail>
+              </StyledDetails>
+            </StyledContent>
+            <AutoColumn style={{ padding: '0 20px' }}>
+              <RowBetween>
+                <RowFixed>
+                  <TYPE.black fontSize={14} fontWeight={400} color={theme.text6}>
+                    合约地址
+                  </TYPE.black>
+                </RowFixed>
+                <TYPE.black fontSize={14} color={theme.text6}>
+                  <Token hash={token} />
+                </TYPE.black>
+              </RowBetween>
+              <RowBetween>
+                <RowFixed>
+                  <TYPE.black fontSize={14} fontWeight={400} color={theme.text6}>
+                    buyTotalSupply
+                  </TYPE.black>
+                </RowFixed>
+                <TYPE.black fontSize={14} color={theme.text6}>
+                  {mineToken && mineToken.buyTotalSupply
+                    ? formatUnits(mineToken.buyTotalSupply.toString(), 18).toString()
+                    : ''}
+                </TYPE.black>
+              </RowBetween>
+              <RowBetween>
+                <RowFixed>
+                  <TYPE.black fontSize={14} fontWeight={400} color={theme.text6}>
+                    buySupply
+                  </TYPE.black>
+                </RowFixed>
+                <TYPE.black fontSize={14} color={theme.text6}>
+                  {mineToken && mineToken.buySupply ? formatUnits(mineToken.buySupply.toString(), 18).toString() : ''}
+                </TYPE.black>
+              </RowBetween>
+              <RowBetween>
+                <RowFixed>
+                  <TYPE.black fontSize={14} fontWeight={400} color={theme.text6}>
+                    收益开始时间
+                  </TYPE.black>
+                </RowFixed>
+                <TYPE.black fontSize={14} color={theme.text6}>
+                  {mineToken ? mineToken.startTime : ''}
+                </TYPE.black>
+              </RowBetween>
+              <RowBetween>
+                <RowFixed>
+                  <TYPE.black fontSize={14} fontWeight={400} color={theme.text6}>
+                    收益结束时间
+                  </TYPE.black>
+                </RowFixed>
+                <TYPE.black fontSize={14} color={theme.text6}>
+                  {mineToken ? mineToken.endTime : ''}
+                </TYPE.black>
+              </RowBetween>
+              <RowBetween>
+                <RowFixed>
+                  <TYPE.black fontSize={14} fontWeight={400} color={theme.text6}>
+                    认购价格
+                  </TYPE.black>
+                </RowFixed>
+                <TYPE.black fontSize={14} color={theme.text6}>
+                  {mineToken && mineToken.buyPrice ? mineToken.buyPrice.toString() : '-'}
+                </TYPE.black>
+              </RowBetween>
+              <RowBetween>
+                <RowFixed>
+                  <TYPE.black fontSize={14} fontWeight={400} color={theme.text6}>
+                    buyStartTime
+                  </TYPE.black>
+                </RowFixed>
+                <TYPE.black fontSize={14} color={theme.text6}>
+                  {mineToken ? mineToken.buyStartTime : ''}
+                </TYPE.black>
+              </RowBetween>
+              <RowBetween>
+                <RowFixed>
+                  <TYPE.black fontSize={14} fontWeight={400} color={theme.text6}>
+                    buyEndTime
+                  </TYPE.black>
+                </RowFixed>
+                <TYPE.black fontSize={14} color={theme.text6}>
+                  {mineToken ? mineToken.buyEndTime : ''}
+                </TYPE.black>
+              </RowBetween>
+              <RowBetween>
+                <RowFixed>
+                  <TYPE.black fontSize={14} fontWeight={400} color={theme.text6}>
+                    payToke address
+                  </TYPE.black>
+                </RowFixed>
+                <TYPE.black fontSize={14} color={theme.text6}>
+                  <Token hash={mineToken ? (mineToken.usdt ? mineToken.usdt : token) : token} />
+                </TYPE.black>
+              </RowBetween>
+              <RowBetween>
+                <RowFixed>
+                  <TYPE.black fontSize={14} fontWeight={400} color={theme.text6}>
+                    payToke symbol
+                  </TYPE.black>
+                </RowFixed>
+                <TYPE.black fontSize={14} color={theme.text6}>
+                  {currencyPay ? currencyPay.symbol : ''}
+                </TYPE.black>
+              </RowBetween>
+              <RowBetween>
+                <RowFixed>
+                  <TYPE.black fontSize={14} fontWeight={400} color={theme.text6}>
+                    Yours Balance
+                  </TYPE.black>
+                </RowFixed>
+                <TYPE.black fontSize={14} color={theme.text6}>
+                  {/*{currencyPayBalance}*/}
+                  {currencyPayBalance?.toSignificant(6)}
+                </TYPE.black>
+              </RowBetween>
+            </AutoColumn>
+            <AutoColumn gap={'md'}>
+              <NumericalInputPanel
+                label={'buyAmount'}
+                value={buyAmount}
+                id="add-issue-input-buyAmount"
+                onUserInput={onBuyAmount}
+              />
+            </AutoColumn>
+            <BottomGrouping>
+              {(approvalA === ApprovalState.NOT_APPROVED || approvalA === ApprovalState.PENDING) && isValid && (
+                <RowBetween>
+                  {
+                    <ButtonPrimary
+                      onClick={approveACallback}
+                      disabled={approvalA === ApprovalState.PENDING}
+                      width={'100%'}
+                    >
+                      {approvalA === ApprovalState.PENDING ? (
+                        <Dots>Approving {currencyPay?.symbol}</Dots>
+                      ) : (
+                        'Approve ' + currencyPay?.symbol
+                      )}
+                    </ButtonPrimary>
+                  }
+                </RowBetween>
+              )}
+              <ButtonError
+                onClick={() => {
+                  expertMode ? onAdd() : setShowConfirm(true)
+                }}
+                disabled={!isValid || approvalA !== ApprovalState.APPROVED}
+                error={!isValid}
+              >
+                <Text fontSize={16} fontWeight={500}>
+                  {!isValid ? inputError : 'Buy'}
+                </Text>
+              </ButtonError>
+            </BottomGrouping>
+          </AutoColumn>
+        </Wrapper>
+      </AppBody>
+    </>
+  )
+}
 
 const StyledInfo = styled.div`
   display: grid;
@@ -70,166 +337,3 @@ const StyledContent = styled.div`
   display: flex;
   flex-direction: column;
 `
-export function ApplyDetails(props: RouteComponentProps<{ applyId: string }>) {
-  //   const {
-  //     match: {
-  //       params: { applyId }
-  //     }
-  //   } = props
-
-  const theme = useContext(ThemeContext)
-  return (
-    <>
-      <AppBody>
-        <AddRemoveTabs adding={true} />
-        <Wrapper>
-          <AutoColumn gap="20px">
-            <ColumnCenter></ColumnCenter>
-            <StyledContent style={{ padding: '0 20px' }}>
-              <StyledInfo>
-                <StyledEthereumLogo src={EthereumLogo} size={'40px'} style={{}} />
-              </StyledInfo>
-              <StyledTitle>AR-ETH</StyledTitle>
-              <StyledDetails>
-                <StyledDetail>
-                  Arweave is a new blockchain storage platform designed to overcome the scalability, data availability,
-                  and cost issues that exist in blockchain data storage.{' '}
-                </StyledDetail>
-              </StyledDetails>
-            </StyledContent>
-            <AutoColumn style={{ padding: '0 20px' }}>
-              <RowBetween>
-                <RowFixed>
-                  <TYPE.black fontSize={14} fontWeight={400} color={theme.text6}>
-                    Token总量
-                  </TYPE.black>
-                </RowFixed>
-                <TYPE.black fontSize={14} color={theme.text6}>
-                  10,000,000,000
-                </TYPE.black>
-              </RowBetween>
-              <RowBetween>
-                <RowFixed>
-                  <TYPE.black fontSize={14} fontWeight={400} color={theme.text6}>
-                    发⾏合约地址
-                  </TYPE.black>
-                </RowFixed>
-                <TYPE.black fontSize={14} color={theme.text6}>
-                  0xb132F38...a7C1A6
-                </TYPE.black>
-              </RowBetween>
-              <RowBetween>
-                <RowFixed>
-                  <TYPE.black fontSize={14} fontWeight={400} color={theme.text6}>
-                    储备率
-                  </TYPE.black>
-                </RowFixed>
-                <TYPE.black fontSize={14} color={theme.text6}>
-                  0.22ETH
-                </TYPE.black>
-              </RowBetween>
-              <RowBetween>
-                <RowFixed>
-                  <TYPE.black fontSize={14} fontWeight={400} color={theme.text6}>
-                    生效周期
-                  </TYPE.black>
-                </RowFixed>
-                <TYPE.black fontSize={14} color={theme.text6}>
-                  7day
-                </TYPE.black>
-              </RowBetween>
-              <RowBetween>
-                <RowFixed>
-                  <TYPE.black fontSize={14} fontWeight={400} color={theme.text6}>
-                    收益开始时间
-                  </TYPE.black>
-                </RowFixed>
-                <TYPE.black fontSize={14} color={theme.text6}>
-                  2020-12-21
-                </TYPE.black>
-              </RowBetween>
-              <RowBetween>
-                <RowFixed>
-                  <TYPE.black fontSize={14} fontWeight={400} color={theme.text6}>
-                    收益结束时间
-                  </TYPE.black>
-                </RowFixed>
-                <TYPE.black fontSize={14} color={theme.text6}>
-                  2023-12-11
-                </TYPE.black>
-              </RowBetween>
-              <RowBetween>
-                <RowFixed>
-                  <TYPE.black fontSize={14} fontWeight={400} color={theme.text6}>
-                    矿机品牌
-                  </TYPE.black>
-                </RowFixed>
-                <TYPE.black fontSize={14} color={theme.text6}>
-                  XXXXX
-                </TYPE.black>
-              </RowBetween>
-              <RowBetween>
-                <RowFixed>
-                  <TYPE.black fontSize={14} fontWeight={400} color={theme.text6}>
-                    矿机型号
-                  </TYPE.black>
-                </RowFixed>
-                <TYPE.black fontSize={14} color={theme.text6}>
-                  XXXXX
-                </TYPE.black>
-              </RowBetween>
-              <RowBetween>
-                <RowFixed>
-                  <TYPE.black fontSize={14} fontWeight={400} color={theme.text6}>
-                    认购价格
-                  </TYPE.black>
-                </RowFixed>
-                <TYPE.black fontSize={14} color={theme.text6}>
-                  0.22ETH
-                </TYPE.black>
-              </RowBetween>
-              <RowBetween>
-                <RowFixed>
-                  <TYPE.black fontSize={14} fontWeight={400} color={theme.text6}>
-                    starttime
-                  </TYPE.black>
-                </RowFixed>
-                <TYPE.black fontSize={14} color={theme.text6}>
-                  2020-12-30 12:30:00
-                </TYPE.black>
-              </RowBetween>
-              <RowBetween>
-                <RowFixed>
-                  <TYPE.black fontSize={14} fontWeight={400} color={theme.text6}>
-                    endtime
-                  </TYPE.black>
-                </RowFixed>
-                <TYPE.black fontSize={14} color={theme.text6}>
-                  2020-12-30 12:30:00
-                </TYPE.black>
-              </RowBetween>
-            </AutoColumn>
-            <AutoColumn gap={'md'}>
-              <ApplyInputPanelProps label={'认购数量'} />
-              <AutoColumn justify="space-between">
-                <AutoRow justify={'center'}>
-                  <ArrowWrapper clickable>
-                    <ArrowDown size="16" color={theme.text2} />
-                  </ArrowWrapper>
-                </AutoRow>
-              </AutoColumn>
-              <ApplyInputPanelProps label={'总价'} />
-            </AutoColumn>
-            <BottomGrouping>
-              <ButtonError>
-                <Text fontSize={16} fontWeight={500}>
-                  Pay
-                </Text>
-              </ButtonError>
-            </BottomGrouping>
-          </AutoColumn>
-        </Wrapper>
-      </AppBody>
-    </>
-  )
-}

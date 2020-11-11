@@ -1,17 +1,66 @@
-// import React, { useContext, useMemo } from 'react'
-
-// import AppBody from '../AppBody'
 import React from 'react'
 import PageHeader from '../../components/PageHeader'
 import chef from '../../assets/img/chef.png'
-// import { Wrapper } from '../../components/swap/styleds'
-// import { AutoColumn } from '../../components/Column'
 import styled from 'styled-components'
-import Container from '../../components/CardContent'
-import Balances from './components/Balances'
 import Value from '../../components/Value'
 import Label from '../../components/Label'
-const Div1 = styled.div`
+import { useAllMineTokenAddressess, useHomeAllMineTokens } from '../../state/issue/hooks'
+import { useWeb3React } from '@web3-react/core'
+import { formatUnits } from '@ethersproject/units'
+
+export default function Home() {
+  const { account } = useWeb3React()
+  const mineTokens = useAllMineTokenAddressess()
+  const homeAllMineTokens = useHomeAllMineTokens(mineTokens, account ?? undefined)
+  console.log(homeAllMineTokens)
+
+  const tokenCard = (homeAllMineTokens || []).map((item, index) => {
+    return item && item.balance && item.balance>0 ? (
+      <ColumnHome key={index}>
+        <Div11>
+          <CardHome>
+            {/*<BalCard>*/}
+            {/*  <Label text="Your Earnings" />*/}
+            {/*  <Value value={'0.5'} />*/}
+            {/*  <Label text="WBTC" />*/}
+            {/*</BalCard>*/}
+            <BalSumCard>
+              <Label text={item.symbol} />
+              <Value value={item.balance ? formatUnits(item.balance.toString(), 18).toString() : 0} />
+              {/*<Label text="HB.COM" />*/}
+            </BalSumCard>
+          </CardHome>
+          <Footnote>
+            Balance
+            <FootnoteValue>{item.accReward ? formatUnits(item.accReward.toString(), 18).toString() : 0}</FootnoteValue>
+          </Footnote>
+          <Footnote>
+            Pending
+            <FootnoteValue>{item.waitReward ? formatUnits(item.waitReward.toString(), 18).toString() : 0}</FootnoteValue>
+          </Footnote>
+        </Div11>
+      </ColumnHome>
+    ) : null
+  })
+  return (
+    <>
+      <PageHeader
+        icon={<img src={chef} height={120} alt="" />}
+        title="MasterChef is Ready"
+        subtitle="Stake MinerSwap LP tokens to claim your very own great MST!"
+      />
+      {/*<Container>*/}
+      {/*  <Balances />*/}
+      {/*</Container>*/}
+      {/*<StyledInfo>*/}
+      {/*  🏆<b>Pro Tip</b>: MST-ETH SLP token pool yields 10.0x more token rewards per block.*/}
+      {/*</StyledInfo>*/}
+      <>{tokenCard}</>
+    </>
+  )
+}
+
+const ColumnHome = styled.div`
   display: grid;
   grid-auto-rows: auto;
   row-gap: 24px;
@@ -40,20 +89,19 @@ const Div11 = styled.div`
 
 const CardHome = styled.div`
   display: grid;
-  grid-template-columns: 0.5fr 1fr;
   gap: 0px;
   -webkit-box-align: center;
   align-items: center;
   padding: 1rem;
   z-index: 1;
 `
-const BalCard = styled.div`
-  text-align: center;
-  box-sizing: border-box;
-  margin: 0px;
-  min-width: 0px;
-  border-right: solid 1px ${({ theme }) => theme.grey300};
-`
+// const BalCard = styled.div`
+//   text-align: center;
+//   box-sizing: border-box;
+//   margin: 0px;
+//   min-width: 0px;
+//   border-right: solid 1px ${({ theme }) => theme.grey300};
+// `
 const BalSumCard = styled.div`
   text-align: center;
   box-sizing: border-box;
@@ -69,94 +117,4 @@ const Footnote = styled.div`
 const FootnoteValue = styled.div`
   font-family: 'Roboto Mono', monospace;
   float: right;
-`
-export default function Home() {
-  return (
-    <>
-      <PageHeader
-        icon={<img src={chef} height={120} alt="" />}
-        title="MasterChef is Ready"
-        subtitle="Stake MinerSwap LP tokens to claim your very own great MST!"
-      />
-      <Container>
-        <Balances />
-      </Container>
-      <StyledInfo>
-        🏆<b>Pro Tip</b>: MST-ETH SLP token pool yields 10.0x more token rewards per block.
-      </StyledInfo>
-      <Div1>
-        <Div11>
-          <CardHome>
-            <BalCard>
-              <Label text="Your Earnings" />
-              <Value value={'0.5'} />
-              <Label text="WBTC" />
-            </BalCard>
-            <BalSumCard>
-              <Label text="Hash Token" />
-              <Value value={'2,100'} />
-              <Label text="HB.COM.BTC.30.01" />
-            </BalSumCard>
-          </CardHome>
-          <Footnote>
-            Pending
-            <FootnoteValue>1,000 WBTC</FootnoteValue>
-          </Footnote>
-        </Div11>
-      </Div1>
-      <Div1>
-        <Div11>
-          <CardHome>
-            <BalCard>
-              <Label text="Your Earnings" />
-              <Value value={'80'} />
-              <Label text="WBTC" />
-            </BalCard>
-            <BalSumCard>
-              <Label text="Hash Token" />
-              <Value value={'9,100'} />
-              <Label text="HB.COM.BTC.30.01" />
-            </BalSumCard>
-          </CardHome>
-          <Footnote>
-            Pending
-            <FootnoteValue>8,000 WBTC</FootnoteValue>
-          </Footnote>
-        </Div11>
-      </Div1>
-      <Div1>
-        <Div11>
-          <CardHome>
-            <BalCard>
-              <Label text="Your Earnings" />
-              <Value value={'20.5'} />
-              <Label text="WBTC" />
-            </BalCard>
-            <BalSumCard>
-              <Label text="Hash Token" />
-              <Value value={'3,100'} />
-              <Label text="HB.COM.BTC.30.01" />
-            </BalSumCard>
-          </CardHome>
-          <Footnote>
-            Pending
-            <FootnoteValue>4,000 WBTC</FootnoteValue>
-          </Footnote>
-        </Div11>
-      </Div1>
-    </>
-  )
-}
-
-const StyledInfo = styled.h3`
-  color: ${({ theme }) => theme.grey500};
-  font-size: 16px;
-  font-weight: 400;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-
-  > b {
-    color: ${({ theme }) => theme.grey600};
-  }
 `

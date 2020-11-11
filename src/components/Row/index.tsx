@@ -12,6 +12,7 @@ const Row = styled(Box)<{ align?: string; padding?: string; border?: string; bor
 `
 
 export const RowBetween = styled(Row)`
+  margin-top: 0.2rem;
   justify-content: space-between;
 `
 

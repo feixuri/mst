@@ -1,25 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e7452917-f67f-4c4d-8c0e-6cfe1e0935a2" name="Default Changelist" comment="1">
-      <change afterPath="$PROJECT_DIR$/src/assets/img/chef.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ApplyInputPanel/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Container/Container.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Container/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/PageHeader/PageHeader.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/PageHeader/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Apply/applydetails.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Issue/index.tsx" afterDir="false" />
+    <list default="true" id="e7452917-f67f-4c4d-8c0e-6cfe1e0935a2" name="Default Changelist" comment="全新发布">
+      <change afterPath="$PROJECT_DIR$/src/assets/dist/react-datepicker.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/CurrencyInputPanel/index_bak.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/IssueInputPanel/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/IssuerCard/Token.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/IssuerCard/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/SearchModal/CurrencyBtcList.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/SearchModal/CurrencyBtcModal.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/SearchModal/CurrencyBtcSearch.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/SearchModal/CurrencyList_bak.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/SearchModal/CurrencySearchModal_bak.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/SearchModal/CurrencySearch_bak.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/TextualInput/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/constants/abis/BtcMineToken.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/constants/abis/IssuerBTC.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/constants/abis/IssuerManagerV1.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/constants/issuer/list.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/hooks/Issuer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Issue/AddIssue.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Issue/ConfirmRegisterModalBottom.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Issue/IssueList.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Issue/RegistIssuer.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Issue/components/Stake.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/state/issue/actions.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/state/issue/hooks.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/state/issue/reducer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/getMineToken.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.yarn-integrity" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.yarn-integrity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/CurrencyInputPanel/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CurrencyInputPanel/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Header/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Row/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Row/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SearchModal/CurrencySearch.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchModal/CurrencySearch.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SearchModal/CurrencySearchModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchModal/CurrencySearchModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constants/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/useContract.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/useContract.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/AddLiquidity/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/AddLiquidity/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Apply/applydetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Apply/applydetails.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Apply/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Apply/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Home/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Home/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/theme/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/theme/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/theme/styled.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/theme/styled.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Issue/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Issue/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/state/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/state/lists/hooks.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/lists/hooks.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/state/multicall/hooks.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/multicall/hooks.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,8 +57,28 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
   </component>
   <component name="ProjectId" id="1hrkI3rIWt2gUCgnk1q0k86g3rA" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -39,7 +89,8 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/pages/Issue" />
+    <property name="js.last.introduce.type" value="CONST" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/SearchModal" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -49,17 +100,22 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.standard" value="" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs.jest.jest_package" value="$PROJECT_DIR$/node_modules/react-scripts" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/assets/dist" />
+      <recent name="$PROJECT_DIR$/src/pages/Issue" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/SearchModal" />
+      <recent name="$PROJECT_DIR$/src/state/issue" />
       <recent name="$PROJECT_DIR$/src/pages/Issue" />
       <recent name="$PROJECT_DIR$/src/components" />
-      <recent name="$PROJECT_DIR$/src/assets/img" />
-      <recent name="$PROJECT_DIR$/src/components/PageHeader" />
-      <recent name="$PROJECT_DIR$/src/pages/LiquidityMining" />
+      <recent name="$PROJECT_DIR$/src/components/CurrencyInputPanel" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -74,6 +130,26 @@
       </list>
     </option>
   </component>
+  <component name="RunManager">
+    <configuration name="utils" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/src/utils/index.test.ts" />
+      <test-names>
+        <test-name value="utils" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Jest.utils" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -87,7 +163,25 @@
       <workItem from="1600776515880" duration="44506000" />
       <workItem from="1602264702868" duration="9726000" />
       <workItem from="1603096336691" duration="16519000" />
-      <workItem from="1603142428316" duration="1175000" />
+      <workItem from="1603142428316" duration="2128000" />
+      <workItem from="1603179244762" duration="1695000" />
+      <workItem from="1603182241404" duration="5125000" />
+      <workItem from="1603376447673" duration="37944000" />
+      <workItem from="1603787157319" duration="5883000" />
+      <workItem from="1603846960045" duration="15567000" />
+      <workItem from="1603910825929" duration="628000" />
+      <workItem from="1603933596703" duration="8160000" />
+      <workItem from="1603961779796" duration="48560000" />
+      <workItem from="1604301813386" duration="14624000" />
+      <workItem from="1604324476121" duration="62107000" />
+      <workItem from="1604473288394" duration="35082000" />
+      <workItem from="1604587939031" duration="107000" />
+      <workItem from="1604590760300" duration="44178000" />
+      <workItem from="1604877271845" duration="11177000" />
+      <workItem from="1605013499197" duration="586000" />
+      <workItem from="1605059915497" duration="6984000" />
+      <workItem from="1605096412239" duration="8000" />
+      <workItem from="1605096454509" duration="1618000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1600975944893</created>
@@ -124,7 +218,14 @@
       <option name="project" value="LOCAL" />
       <updated>1602278929558</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="全新发布">
+      <created>1603143853802</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1603143853802</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -156,6 +257,18 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="1" />
     <MESSAGE value="20201010" />
-    <option name="LAST_COMMIT_MESSAGE" value="20201010" />
+    <MESSAGE value="全新发布" />
+    <option name="LAST_COMMIT_MESSAGE" value="全新发布" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/state/wallet/hooks.ts</url>
+          <line>59</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

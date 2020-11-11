@@ -1,110 +1,67 @@
 import React from 'react'
-
 import styled from 'styled-components'
-
 import { StyledCard } from '../../components/Card'
 import CardContent from '../../components/CardContent'
 import CardButton from '../../components/CardButton'
 import Spacer from '../../components/Spacer'
 import EthereumLogo from '../../assets/images/ethereum-logo.png'
-import UsdtLogo from '../../assets/images/usdt-logo.png'
-// import AppBody from '../AppBody'
+import { useAllMineTokenAddressess, useBuyAllMineTokens } from '../../state/issue/hooks'
+import moment from 'moment'
 
-// import ListLogo from '../../components/ListLogo'
-export default function Pool() {
+export default function Buy() {
+  const mineTokens = useAllMineTokenAddressess()
+  const allMineTokenInfos = useBuyAllMineTokens(mineTokens)
+  // console.log(allMineTokenInfos)
+  const cardList = (allMineTokenInfos || []).map((item, index) => {
+    return item && item.buyEndTime && item.buyEndTime * 1000 > new Date().getTime() ? (
+      <>
+        <StyledCardWrapper key={index} style={{ padding: '10px' }}>
+          <StyledCard>
+            <CardContent>
+              <StyledContent>
+                <StyledDetails style={{ width: '100%', textAlign: 'right' }}>
+                  {/*<StyledTime>End countdown:1D15H</StyledTime>*/}
+                  <StyledTime></StyledTime>
+                </StyledDetails>
+                <StyledInfo>
+                  <StyledEthereumLogo src={EthereumLogo} size={'40px'} style={{}} />
+                </StyledInfo>
+                <StyledTitle>{item.symbol}</StyledTitle>
+                <StyledDetails>
+                  <StyledDetail>{item.comment} </StyledDetail>
+                </StyledDetails>
+                <StyledInsight>
+                  <span>Buy StartTime</span>
+                  <span>
+                    {item.buyStartTime
+                      ? moment(parseInt(item.buyStartTime.toString()) * 1000).format('YYYY-MM-DD HH:mm:ss')
+                      : '-'}
+                  </span>
+                </StyledInsight>
+                <StyledInsight>
+                  <span>Buy EndTime</span>
+                  <span>
+                    {item.buyEndTime
+                      ? moment(parseInt(item.buyEndTime.toString()) * 1000).format('YYYY-MM-DD HH:mm:ss')
+                      : '-'}
+                  </span>
+                </StyledInsight>
+                <Spacer />
+                <CardButton disabled={false} text={'Buy'} to={`/apply/${item.address}/${item.symbol}`}></CardButton>
+              </StyledContent>
+            </CardContent>
+          </StyledCard>
+        </StyledCardWrapper>
+      </>
+    ) : null
+  })
   return (
     <>
       <StyledCards>
         <StyledRow>
-          <StyledCardWrapper>
-            <StyledCard>
-              <CardContent>
-                <StyledContent>
-                  <StyledDetails style={{ width: '100%', textAlign: 'right' }}>
-                    <StyledTime>End countdown:1D15H</StyledTime>
-                  </StyledDetails>
-                  <StyledInfo>
-                    <StyledEthereumLogo src={EthereumLogo} size={'40px'} style={{}} />
-                  </StyledInfo>
-                  <StyledTitle>AR-ETH</StyledTitle>
-                  <StyledDetails>
-                    <StyledDetail>Arweave is a new blockchain storage platform designed to overcome the scalability, data availability, and cost issues that exist in blockchain data storage. </StyledDetail>
-                  </StyledDetails>
-                  <StyledInsight>
-                    <span>Start Time</span>
-                    <span>2020-09-04 15:08:09</span>
-                  </StyledInsight>
-                  <StyledInsight>
-                    <span>End Time</span>
-                    <span>2020-09-14 20:08:09</span>
-                  </StyledInsight>
-                  <Spacer/>
-                  <CardButton disabled={false} text={'Buy'} to={`/apply/123456`}></CardButton>
-                </StyledContent>
-              </CardContent>
-            </StyledCard>
-          </StyledCardWrapper>
-          <Spacer />
-          <StyledCardWrapper>
-            <StyledCard>
-              <CardContent>
-                <StyledContent>
-                  <StyledDetails style={{ width: '100%', textAlign: 'right' }}>
-                    <StyledTime>End countdown:1D15H</StyledTime>
-                  </StyledDetails>
-                  <StyledInfo>
-                    <StyledEthereumLogo src={UsdtLogo} size={'40px'} style={{}} />
-                  </StyledInfo>
-                  <StyledTitle>RFUEL-USDT</StyledTitle>
-                  <StyledDetails>
-                    <StyledDetail>Rio DeFi is creating technological infrastructure for a new decentralized financial system powered by blockchains and smart contracts.</StyledDetail>
-                  </StyledDetails>
-                  <StyledInsight>
-                    <span>Start Time</span>
-                    <span>2020-09-04 15:08:09</span>
-                  </StyledInsight>
-                  <StyledInsight>
-                    <span>End Time</span>
-                    <span>2020-09-14 20:08:09</span>
-                  </StyledInsight>
-                  <Spacer/>
-                  <CardButton disabled={false} text={'Buy'} to={`/apply/123456`}></CardButton>
-                </StyledContent>
-              </CardContent>
-            </StyledCard>
-          </StyledCardWrapper>
-          <Spacer />
-          <StyledCardWrapper>
-            <StyledCard>
-              <CardContent>
-                <StyledContent>
-                  <StyledDetails style={{ width: '100%', textAlign: 'right' }}>
-                    <StyledTime>End countdown:1D15H</StyledTime>
-                  </StyledDetails>
-                  <StyledInfo>
-                    <StyledEthereumLogo src={UsdtLogo} size={'40px'} style={{}} />
-                  </StyledInfo>
-                  <StyledTitle>RFUEL-USDT</StyledTitle>
-                  <StyledDetails>
-                    <StyledDetail>Rio DeFi is creating technological infrastructure for a new decentralized financial system powered by blockchains and smart contracts.</StyledDetail>
-                  </StyledDetails>
-                  <StyledInsight>
-                    <span>Start Time</span>
-                    <span>2020-09-04 15:08:09</span>
-                  </StyledInsight>
-                  <StyledInsight>
-                    <span>End Time</span>
-                    <span>2020-09-14 20:08:09</span>
-                  </StyledInsight>
-                  <Spacer/>
-                  <CardButton disabled={false} text={'Buy'} to={`/apply/123456`}></CardButton>
-                </StyledContent>
-              </CardContent>
-            </StyledCard>
-          </StyledCardWrapper>
+          <>{cardList}</>
         </StyledRow>
       </StyledCards>
-      {/*<AppBody></AppBody>*/}
     </>
   )
 }

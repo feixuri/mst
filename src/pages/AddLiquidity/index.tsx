@@ -153,7 +153,9 @@ export default function AddLiquidity({
         account,
         deadlineFromNow
       ]
+      console.log(args)
       value = BigNumber.from((tokenBIsETH ? parsedAmountB : parsedAmountA).raw.toString())
+      console.log(value)
     } else {
       estimate = router.estimateGas.addLiquidity
       method = router.addLiquidity

@@ -4,7 +4,10 @@ import { AddressZero } from '@ethersproject/constants'
 import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers'
 import { BigNumber } from '@ethersproject/bignumber'
 import { abi as IUniswapV2Router02ABI } from '@uniswap/v2-periphery/build/IUniswapV2Router02.json'
-import { ROUTER_ADDRESS } from '../constants'
+import { abi as IssuerManagerV1ABI } from '../constants/abis/IssuerManagerV1.json'
+import { abi as IssuerBTCABI } from '../constants/abis/IssuerBTC.json'
+import { abi as BtcMineTokenABI } from '../constants/abis/BtcMineToken.json'
+import { ROUTER_ADDRESS, ISSUERMANAGER_ADDRESS } from '../constants'
 import { ChainId, JSBI, Percent, Token, CurrencyAmount, Currency, ETHER } from '@uniswap/sdk'
 import { TokenAddressMap } from '../state/lists/hooks'
 
@@ -53,6 +56,7 @@ export function shortenAddress(address: string, chars = 4): string {
 
 // add 10%
 export function calculateGasMargin(value: BigNumber): BigNumber {
+  console.log(value)
   return value.mul(BigNumber.from(10000).add(BigNumber.from(1000))).div(BigNumber.from(10000))
 }
 
@@ -86,13 +90,21 @@ export function getContract(address: string, ABI: any, library: Web3Provider, ac
   if (!isAddress(address) || address === AddressZero) {
     throw Error(`Invalid 'address' parameter '${address}'.`)
   }
-
   return new Contract(address, ABI, getProviderOrSigner(library, account) as any)
 }
 
 // account is optional
 export function getRouterContract(_: number, library: Web3Provider, account?: string): Contract {
   return getContract(ROUTER_ADDRESS, IUniswapV2Router02ABI, library, account)
+}
+export function getIssuerManagerContract(_: number, library: Web3Provider, account?: string): Contract {
+  return getContract(ISSUERMANAGER_ADDRESS, IssuerManagerV1ABI, library, account)
+}
+export function getIssuerBTCContract(address: string, library: Web3Provider, account?: string): Contract {
+  return getContract(address, IssuerBTCABI, library, account)
+}
+export function getBtcMineTokenContract(address: string, library: Web3Provider, account?: string): Contract {
+  return getContract(address, BtcMineTokenABI, library, account)
 }
 
 export function escapeRegExp(string: string): string {

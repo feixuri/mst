@@ -4,24 +4,20 @@ import styled, { ThemeContext } from 'styled-components'
 import { darken } from 'polished'
 import { useCurrencyBalance } from '../../state/wallet/hooks'
 import CurrencySearchModal from '../SearchModal/CurrencySearchModal'
-import CurrencyBtcModal from '../SearchModal/CurrencyBtcModal'
 import CurrencyLogo from '../CurrencyLogo'
 import DoubleCurrencyLogo from '../DoubleLogo'
 import { RowBetween } from '../Row'
 import { TYPE } from '../../theme'
 import { Input as NumericalInput } from '../NumericalInput'
-import { Input as TextualInput } from '../TextualInput'
 import { ReactComponent as DropDown } from '../../assets/images/dropdown.svg'
 
 import { useActiveWeb3React } from '../../hooks'
 import { useTranslation } from 'react-i18next'
-import DatePicker from 'react-datepicker'
-import '../../assets/dist/react-datepicker.css'
 
-const InputRow = styled.div`
+const InputRow = styled.div<{ selected: boolean }>`
   ${({ theme }) => theme.flexRowNoWrap}
   align-items: center;
-  padding: 0.75rem 0.75rem 0.75rem 1rem;
+  padding: ${({ selected }) => (selected ? '0.75rem 0.5rem 0.75rem 1rem' : '0.75rem 0.75rem 0.75rem 1rem')};
 `
 
 const CurrencySelect = styled.button<{ selected: boolean }>`
@@ -122,7 +118,7 @@ interface CurrencyInputPanelProps {
   value: string
   onUserInput: (value: string) => void
   onMax?: () => void
-  showMaxButton?: boolean
+  showMaxButton: boolean
   label?: string
   onCurrencySelect?: (currency: Currency) => void
   currency?: Currency | null
@@ -187,7 +183,7 @@ export default function CurrencyInputPanel({
             </RowBetween>
           </LabelRow>
         )}
-        <InputRow style={hideInput ? { padding: '0', borderRadius: '8px' } : {}}>
+        <InputRow style={hideInput ? { padding: '0', borderRadius: '8px' } : {}} selected={disableCurrencySelect}>
           {!hideInput && (
             <>
               <NumericalInput
@@ -255,196 +251,6 @@ export default function CurrencyInputPanel({
           showCommonBases={showCommonBases}
         />
       )}
-    </InputPanel>
-  )
-}
-export function NumericalInputPanel({ value, onUserInput, label = 'Input', id }: CurrencyInputPanelProps) {
-  const theme = useContext(ThemeContext)
-  return (
-    <InputPanel id={id}>
-      <Container hideInput={false}>
-        <LabelRow>
-          <RowBetween>
-            <TYPE.body color={theme.text2} fontWeight={500} fontSize={14}>
-              {label}
-            </TYPE.body>
-          </RowBetween>
-        </LabelRow>
-        <InputRow>
-          <>
-            <NumericalInput
-              className="token-amount-input"
-              value={value}
-              onUserInput={val => {
-                onUserInput(val)
-              }}
-            />
-          </>
-        </InputRow>
-      </Container>
-    </InputPanel>
-  )
-}
-export function TextInputPanel({
-  value,
-  onUserInput,
-  label = 'Input',
-  hideInput = false,
-  id
-}: CurrencyInputPanelProps) {
-  const theme = useContext(ThemeContext)
-  return (
-    <InputPanel id={id}>
-      <Container hideInput={hideInput}>
-        {!hideInput && (
-          <LabelRow>
-            <RowBetween>
-              <TYPE.body color={theme.text2} fontWeight={500} fontSize={14}>
-                {label}
-              </TYPE.body>
-            </RowBetween>
-          </LabelRow>
-        )}
-        <InputRow style={hideInput ? { padding: '0', borderRadius: '8px' } : {}}>
-          {!hideInput && (
-            <>
-              <TextualInput
-                className="token-amount-input"
-                value={value}
-                onUserInput={val => {
-                  onUserInput(val)
-                }}
-              />
-            </>
-          )}
-        </InputRow>
-      </Container>
-    </InputPanel>
-  )
-}
-
-export function CurrencyBtcInputPanel({
-  value,
-  onUserInput,
-  label = 'Input',
-  currency,
-  hideInput = false,
-  onCurrencySelect,
-  disableCurrencySelect = true,
-  id
-}: {
-  value: string
-  onUserInput: (value: string) => void
-  onMax?: () => void
-  showMaxButton?: boolean
-  label?: string
-  onCurrencySelect: (currency: Currency) => void
-  currency?: Currency | null
-  disableCurrencySelect?: boolean
-  hideBalance?: boolean
-  pair?: Pair | null
-  hideInput?: boolean
-  otherCurrency?: Currency | null
-  id: string
-  showCommonBases?: boolean
-}) {
-  const { t } = useTranslation()
-  const [modalOpen, setModalOpen] = useState(false)
-  const theme = useContext(ThemeContext)
-  const handleDismissSearch = useCallback(() => {
-    setModalOpen(false)
-  }, [setModalOpen])
-  console.log(currency)
-  return (
-    <InputPanel id={id}>
-      <Container hideInput={hideInput}>
-        {!hideInput && (
-          <LabelRow>
-            <RowBetween>
-              <TYPE.body color={theme.text2} fontWeight={500} fontSize={14}>
-                {label}
-              </TYPE.body>
-            </RowBetween>
-          </LabelRow>
-        )}
-        <InputRow style={hideInput ? { padding: '0', borderRadius: '8px' } : {}}>
-          {!hideInput && (
-            <>
-              <TextualInput
-                style={{ display: 'none' }}
-                className="token-amount-input"
-                value={value}
-                onUserInput={val => {
-                  onUserInput(val)
-                }}
-              />
-            </>
-          )}
-          <CurrencySelect
-            style={{ width: '100%' }}
-            selected={!!currency}
-            className="open-currency-select-button"
-            onClick={() => {
-              if (disableCurrencySelect) {
-                setModalOpen(true)
-              }
-            }}
-          >
-            <Aligner>
-              <StyledTokenName className="token-symbol-container" active={Boolean(currency && currency.symbol)}>
-                {(currency && currency.symbol && currency.symbol.length > 20
-                  ? currency.symbol.slice(0, 4) +
-                    '...' +
-                    currency.symbol.slice(currency.symbol.length - 5, currency.symbol.length)
-                  : currency?.symbol) || t('select')}
-                {/*{t('0xf49AfEC7346b33Fa59c732727ba50e888b117B5B')}*/}
-              </StyledTokenName>
-              <StyledDropDown selected={!!currency} />
-            </Aligner>
-          </CurrencySelect>
-        </InputRow>
-      </Container>
-      <CurrencyBtcModal isOpen={modalOpen} onDismiss={handleDismissSearch} onCurrencySelect={onCurrencySelect} />
-    </InputPanel>
-  )
-}
-
-export function TimeInputPanel({
-  label = 'Input',
-  onUserInput
-}: {
-  label?: string
-  onUserInput: (value: Date) => void
-}) {
-  const theme = useContext(ThemeContext)
-  const [startDate, setStartDate] = useState(new Date())
-  const handleChange = useCallback(date => {
-    onUserInput(date)
-    setStartDate(date)
-  }, [])
-  return (
-    <InputPanel>
-      <Container hideInput={false}>
-        <LabelRow>
-          <RowBetween>
-            <TYPE.body color={theme.text2} fontWeight={500} fontSize={14}>
-              {label}
-            </TYPE.body>
-          </RowBetween>
-        </LabelRow>
-        <InputRow>
-          <>
-            <DatePicker
-              selected={startDate}
-              onChange={(date: any) => {
-                handleChange(date)
-              }}
-              showTimeSelect
-              dateFormat="yyyy-MM-dd HH:mm:ss"
-            />
-          </>
-        </InputRow>
-      </Container>
     </InputPanel>
   )
 }

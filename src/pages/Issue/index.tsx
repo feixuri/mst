@@ -1,151 +1,96 @@
-import React, { useContext } from 'react'
-
-import styled, { ThemeContext } from 'styled-components'
-
 import AppBody from '../AppBody'
-import { AddRemoveTabs } from '../../components/NavigationTabs'
-import { Wrapper } from '../Pool/styleds'
-import { AutoColumn } from '../../components/Column'
-import { BottomGrouping } from '../../components/swap/styleds'
-import { ButtonError } from '../../components/Button'
+import React, { useContext, useEffect, useState } from 'react'
+import { ButtonPrimary } from '../../components/Button'
+import { Link } from 'react-router-dom'
 import { Text } from 'rebass'
+import { AutoColumn } from '../../components/Column'
 import { RowBetween } from '../../components/Row'
-import { TYPE } from '../../theme'
-import { darken } from 'polished'
+import Question from '../../components/QuestionHelper'
+import { ThemeContext } from 'styled-components'
+import IssuerCard from '../../components/IssuerCard'
+import { getIssuerManagerContract } from '../../utils'
+import { useWeb3React } from '@web3-react/core'
+// import { useMultipleContractSingleData } from '../../state/multicall/hooks'
+// import ERC20_INTERFACE from '../../constants/abis/erc20'
 
-const StyledContent = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-`
-const StyledTitle = styled.h4`
-  color: ${({ theme }) => theme.grey600};
-  font-size: 24px;
-  font-weight: 700;
-  margin: ${({ theme }) => theme.spacing[2]}px 0 0;
-  padding: 0;
-`
-
-const InputPanel = styled.div<{ hideInput?: boolean }>`
-  ${({ theme }) => theme.flexColumnNoWrap}
-  position: relative;
-  border-radius: ${({ hideInput }) => (hideInput ? '8px' : '20px')};
-  background-color: ${({ theme }) => theme.bg2};
-  z-index: 1;
-`
-
-const Container = styled.div<{ hideInput?: boolean }>`
-  border-radius: 8px;
-  border: 1px solid ${({ theme }) => theme.bg2};
-  background-color: ${({ theme }) => theme.bg1};
-`
-const LabelRow = styled.div`
-  ${({ theme }) => theme.flexRowNoWrap}
-  align-items: center;
-  color: ${({ theme }) => theme.text1};
-  font-size: 0.75rem;
-  line-height: 1rem;
-  padding: 0.75rem 1rem 0 1rem;
-  span:hover {
-    cursor: pointer;
-    color: ${({ theme }) => darken(0.2, theme.text2)};
-  }
-`
-
-const InputRow = styled.div<{ selected: boolean }>`
-  ${({ theme }) => theme.flexRowNoWrap}
-  align-items: center;
-  padding: ${({ selected }) => (selected ? '0.75rem 0.5rem 0.75rem 1rem' : '0.75rem 0.75rem 0.75rem 1rem')};
-`
-
-const StyledInput = styled.input<{ error?: boolean; fontSize?: string; align?: string }>`
-  color: ${({ error, theme }) => (error ? theme.red1 : theme.text1)};
-  width: 0;
-  position: relative;
-  font-weight: 500;
-  outline: none;
-  border: none;
-  flex: 1 1 auto;
-  background-color: ${({ theme }) => theme.bg1};
-  font-size: ${({ fontSize }) => fontSize ?? '24px'};
-  text-align: ${({ align }) => align && align};
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding: 0px;
-  -webkit-appearance: textfield;
-
-  ::-webkit-search-decoration {
-    -webkit-appearance: none;
-  }
-
-  [type='number'] {
-    -moz-appearance: textfield;
-  }
-
-  ::-webkit-outer-spin-button,
-  ::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-  }
-
-  ::placeholder {
-    color: ${({ theme }) => theme.text4};
-  }
-`
-export default function Pool() {
+export default function IssueList() {
   const theme = useContext(ThemeContext)
+
+  const [data, setData] = useState([
+    {
+      hostname: '',
+      issuerAddress: ''
+    }
+  ])
+  const { account, chainId, library } = useWeb3React()
+  const getIssuers = async () => {
+    if (!chainId || !library || !account) return
+    const issuerManager = getIssuerManagerContract(chainId, library, account)
+    const countOfIssuer = await issuerManager.countOfIssuer().then((countOfIssuer: number) => {
+      return countOfIssuer
+    })
+    const hostnames: string[] = []
+    for (let sn = 0; sn < countOfIssuer; sn++) {
+      await issuerManager.hostnameAtIndex(sn).then((hostname: string) => {
+        hostnames.push(hostname)
+      })
+    }
+    const issuerArry = [
+      {
+        hostname: '',
+        issuerAddress: ''
+      }
+    ]
+    for (let i = 0; i < hostnames.length; i++) {
+      await issuerManager.getIssuerAddress(hostnames[i]).then((addresss: any) => {
+        issuerArry.push({ hostname: hostnames[i], issuerAddress: addresss[1] })
+      })
+    }
+    setData(
+      issuerArry.filter(function(issuers) {
+        return issuers
+      })
+    )
+  }
+  useEffect(() => {
+    getIssuers()
+  }, [])
+  const cardList = (data || []).map(item => {
+    return item && item.hostname ? (
+      <IssuerCard key={item.issuerAddress} hostname={item.hostname} issuerAddress={item.issuerAddress} />
+    ) : null
+  })
+  //获取ERC20 代币余额
+  // const balances = useMultipleContractSingleData(validatedTokenAddresses, ERC20_INTERFACE, 'balanceOf', [address])
   return (
     <>
       <AppBody>
-        <AddRemoveTabs adding={true} />
-        <Wrapper>
-          <AutoColumn gap="20px">
-            <StyledContent style={{ padding: '0 20px' }}>
-              <StyledTitle>Issue Registered</StyledTitle>
-            </StyledContent>
-            <AutoColumn gap={'md'}>
-              <InputPanel>
-                <Container>
-                  <LabelRow>
-                    <RowBetween>
-                      <TYPE.body color={theme.text2} fontWeight={500} fontSize={14}>
-                        Token Domain
-                      </TYPE.body>
-                    </RowBetween>
-                  </LabelRow>
-                  <InputRow selected={false}>
-                    <>
-                      <StyledInput value={'0'}></StyledInput>
-                    </>
-                  </InputRow>
-                </Container>
-              </InputPanel>
-              <InputPanel>
-                <Container>
-                  <LabelRow>
-                    <RowBetween>
-                      <TYPE.body color={theme.text2} fontWeight={500} fontSize={14}>
-                        Domain Introduce
-                      </TYPE.body>
-                    </RowBetween>
-                  </LabelRow>
-                  <InputRow selected={false}>
-                    <>
-                      <StyledInput value={'0'}></StyledInput>
-                    </>
-                  </InputRow>
-                </Container>
-              </InputPanel>
-            </AutoColumn>
-            <BottomGrouping>
-              <ButtonError>
-                <Text fontSize={16} fontWeight={500}>
-                  Register
-                </Text>
-              </ButtonError>
-            </BottomGrouping>
+        <AutoColumn gap="lg" justify="center">
+          <ButtonPrimary id="join-pool-button" as={Link} style={{ padding: 16 }} to="/registIssuer">
+            <Text fontWeight={500} fontSize={20}>
+              Add New Issuer
+            </Text>
+          </ButtonPrimary>
+          <AutoColumn gap="12px" style={{ width: '100%' }}>
+            <RowBetween padding={'0 8px'}>
+              <Text color={theme.text1} fontWeight={500}>
+                Your Issuers
+              </Text>
+              <Question text="说明文字." />
+            </RowBetween>
+            <>
+              {cardList}
+              {/*<IssuerCard hostname={'minerswap.com'} issuerAddress={'0xf49AfEC7346b33Fa59c732727ba50e888b117B5B'} />*/}
+              {/*<IssuerCard hostname={'jd.com'} issuerAddress={'0xf49AfEC7346b33Fa59c732727ba50e888b117B5B'} />*/}
+              {/*<IssuerCard hostname={'taobao.com'} issuerAddress={'0xf49AfEC7346b33Fa59c732727ba50e888b117B5B'} />*/}
+            </>
+            {/*<LightCard padding="40px">*/}
+            {/*  <TYPE.body color={theme.text3} textAlign="center">*/}
+            {/*    No issuer found.*/}
+            {/*  </TYPE.body>*/}
+            {/*</LightCard>*/}
           </AutoColumn>
-        </Wrapper>
+        </AutoColumn>
       </AppBody>
     </>
   )

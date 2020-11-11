@@ -14,6 +14,7 @@ import {
   toCallKey,
   ListenerOptions
 } from './actions'
+import { Issuer } from '../issue/hooks'
 
 export interface Result extends ReadonlyArray<any> {
   readonly [key: string]: any
@@ -186,6 +187,32 @@ export function useSingleContractMultipleData(
   return useMemo(() => {
     return results.map(result => toCallState(result, contract?.interface, fragment, latestBlockNumber))
   }, [fragment, contract, results, latestBlockNumber])
+}
+
+export function useTest(
+  issuers: Issuer[],
+  contractInterface: Interface,
+  methodName: string,
+  options?: ListenerOptions
+): CallState[] {
+  const fragment = useMemo(() => contractInterface.getFunction(methodName), [contractInterface, methodName])
+  const calls: Call[] = []
+  if (fragment && issuers && issuers.length > 0) {
+    issuers.forEach(issuer => {
+      if (issuer && issuer.serialNumber && issuer.SYMBOL && issuer.address && issuer.serialNumber > 0) {
+        for (let sn = 1; sn <= issuer.serialNumber; sn++) {
+          const inputs = issuer.hostname + '-' + issuer.SYMBOL + sn
+          calls.push({ address: issuer.address, callData: contractInterface.encodeFunctionData(fragment, [inputs]) })
+        }
+      }
+    })
+  }
+  const results = useCallsData(calls, options)
+
+  const latestBlockNumber = useBlockNumber()
+  return useMemo(() => {
+    return results.map(result => toCallState(result, contractInterface, fragment, latestBlockNumber))
+  }, [fragment, contractInterface, results, latestBlockNumber])
 }
 
 export function useMultipleContractSingleData(

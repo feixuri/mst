@@ -2,8 +2,19 @@ import { ChainId, JSBI, Percent, Token, WETH } from '@uniswap/sdk'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 
 import { fortmatic, injected, portis, walletconnect, walletlink } from '../connectors'
+//路由合约
+export const ROUTER_ADDRESS = '0xB96A0561612fcB10f8eb5888EE0eaD493Ce2c0a8'
 
-export const ROUTER_ADDRESS = '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D'
+//工厂合约
+export const FACTORY_ADDRESS = '0xe29F01B5A7C93688d98B8Fe6dADfD561BebdB449'
+//weth合约
+export const WETH_ADDRESS = '0xc778417E063141139Fce010982780140Aa0cD5Ab'
+
+export const ISSUERMANAGER_ADDRESS = '0x4fc7f67b3168ee73a0ba37b1acae80d326ab94d1'
+export const WBTC_ADDRESS = '0xf176fC0409c5bcE7B6AE5C5cDd6B3C73a361AEda'
+export const BITCOINORACLE_ADDRESS = '0x698e69b57a5b9f887ae49c91d932d5a1977807c6'
+export const MINETOKENDEPLOYER_ADDRESS = '0x8a13d7486eba09aed075e4f47a4afd41acdec324'
+export const ISSUERDEPLOYER_ADDRESS = '0x7e3c8106013a9770707fd52737ae93fc9be992e4'
 
 // a list of tokens by chain
 type ChainTokenList = {

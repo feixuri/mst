@@ -1,56 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e7452917-f67f-4c4d-8c0e-6cfe1e0935a2" name="Default Changelist" comment="全新发布">
-      <change afterPath="$PROJECT_DIR$/src/assets/dist/react-datepicker.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/CurrencyInputPanel/index_bak.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/IssueInputPanel/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/IssuerCard/Token.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/IssuerCard/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/SearchModal/CurrencyBtcList.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/SearchModal/CurrencyBtcModal.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/SearchModal/CurrencyBtcSearch.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/SearchModal/CurrencyList_bak.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/SearchModal/CurrencySearchModal_bak.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/SearchModal/CurrencySearch_bak.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/TextualInput/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/constants/abis/BtcMineToken.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/constants/abis/IssuerBTC.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/constants/abis/IssuerManagerV1.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/constants/issuer/list.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hooks/Issuer.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Issue/AddIssue.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Issue/ConfirmRegisterModalBottom.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Issue/IssueList.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Issue/RegistIssuer.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Issue/components/Stake.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/state/issue/actions.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/state/issue/hooks.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/state/issue/reducer.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/getMineToken.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.yarn-integrity" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.yarn-integrity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/CurrencyInputPanel/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CurrencyInputPanel/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Header/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Row/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Row/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SearchModal/CurrencySearch.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchModal/CurrencySearch.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SearchModal/CurrencySearchModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchModal/CurrencySearchModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/useContract.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/useContract.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/AddLiquidity/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/AddLiquidity/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Apply/applydetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Apply/applydetails.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Apply/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Apply/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Home/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Home/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Issue/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Issue/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/state/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/state/lists/hooks.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/lists/hooks.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/state/multicall/hooks.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/multicall/hooks.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
-    </list>
+    <list default="true" id="e7452917-f67f-4c4d-8c0e-6cfe1e0935a2" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,7 +132,7 @@
       <workItem from="1605013499197" duration="586000" />
       <workItem from="1605059915497" duration="6984000" />
       <workItem from="1605096412239" duration="8000" />
-      <workItem from="1605096454509" duration="1618000" />
+      <workItem from="1605096454509" duration="2001000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1600975944893</created>
@@ -225,7 +176,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603143853802</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="全新发布">
+      <created>1605099543996</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1605099543996</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

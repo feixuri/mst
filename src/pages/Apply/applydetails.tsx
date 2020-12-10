@@ -135,7 +135,7 @@ export function ApplyDetails({
             pendingText={pendingText}
           />
           <AutoColumn gap="20px">
-            <ColumnCenter></ColumnCenter>
+            <ColumnCenter />
             <StyledContent style={{ padding: '0 20px' }}>
               <StyledInfo>
                 <StyledEthereumLogo src={EthereumLogo} size={'40px'} style={{}} />

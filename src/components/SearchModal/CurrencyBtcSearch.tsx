@@ -46,9 +46,9 @@ export function CurrencyBtcSearch({
     //   ...sorted.filter(token => token.symbol?.toLowerCase() !== symbolMatch[0])
     // ]
 
-    const wBTC = new Token(3, '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599', 4, 'wBTC', 'WBTC')
-    const hBTC = new Token(3, '0x0316EB71485b0Ab14103307bf65a021042c6d380', 4, 'hBTC', 'HBTC')
-    const sBTC = new Token(3, '0xfE18be6b3Bd88A2D2A7f928d00292E7a9963CfC6', 4, 'sBTC', 'SBTC')
+    const wBTC = new Token(3, '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599', 18, 'wBTC', 'WBTC')
+    const hBTC = new Token(3, '0x0316EB71485b0Ab14103307bf65a021042c6d380', 18, 'hBTC', 'HBTC')
+    const sBTC = new Token(3, '0xfE18be6b3Bd88A2D2A7f928d00292E7a9963CfC6', 18, 'sBTC', 'SBTC')
     return [wBTC, hBTC, sBTC]
   }, [])
   // console.log(filteredSortedTokens)

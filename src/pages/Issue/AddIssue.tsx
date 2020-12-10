@@ -156,7 +156,6 @@ export function AddIssue({
       .then((response: TransactionResponse) => {
         setAttemptingTxn(false)
         setTxHash(response.hash)
-        console.log(response)
       })
       .catch((error: { code: number }) => {
         // setShowConfirm(true)

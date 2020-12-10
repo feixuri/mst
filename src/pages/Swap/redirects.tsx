@@ -5,6 +5,9 @@ import { Redirect, RouteComponentProps } from 'react-router-dom'
 export function RedirectPathToSwapOnly({ location }: RouteComponentProps) {
   return <Redirect to={{ ...location, pathname: '/swap' }} />
 }
+export function RedirectPathToHomeOnly({ location }: RouteComponentProps) {
+  return <Redirect to={{ ...location, pathname: '/home' }} />
+}
 
 // Redirects from the /swap/:outputCurrency path to the /swap?outputCurrency=:outputCurrency format
 export function RedirectToSwap(props: RouteComponentProps<{ outputCurrency: string }>) {

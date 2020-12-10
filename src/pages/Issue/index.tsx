@@ -10,7 +10,6 @@ import { ThemeContext } from 'styled-components'
 import IssuerCard from '../../components/IssuerCard'
 import { getIssuerManagerContract } from '../../utils'
 import { useWeb3React } from '@web3-react/core'
-// import { useMultipleContractSingleData } from '../../state/multicall/hooks'
 // import ERC20_INTERFACE from '../../constants/abis/erc20'
 
 export default function IssueList() {
@@ -78,17 +77,7 @@ export default function IssueList() {
               </Text>
               <Question text="说明文字." />
             </RowBetween>
-            <>
-              {cardList}
-              {/*<IssuerCard hostname={'minerswap.com'} issuerAddress={'0xf49AfEC7346b33Fa59c732727ba50e888b117B5B'} />*/}
-              {/*<IssuerCard hostname={'jd.com'} issuerAddress={'0xf49AfEC7346b33Fa59c732727ba50e888b117B5B'} />*/}
-              {/*<IssuerCard hostname={'taobao.com'} issuerAddress={'0xf49AfEC7346b33Fa59c732727ba50e888b117B5B'} />*/}
-            </>
-            {/*<LightCard padding="40px">*/}
-            {/*  <TYPE.body color={theme.text3} textAlign="center">*/}
-            {/*    No issuer found.*/}
-            {/*  </TYPE.body>*/}
-            {/*</LightCard>*/}
+            <>{cardList}</>
           </AutoColumn>
         </AutoColumn>
       </AppBody>

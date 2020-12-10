@@ -1,4 +1,5 @@
 import { useActiveWeb3React } from '../../hooks'
+import { BigNumber } from '@ethersproject/bignumber'
 import { useCallback, useMemo } from 'react'
 import { Field, typeInput } from './actions'
 import { useDispatch, useSelector } from 'react-redux'
@@ -8,7 +9,7 @@ import { ISSUER_LISTS } from '../../constants/issuer/list'
 import { useMultipleContractSingleData, useTest } from '../multicall/hooks'
 import { ISSUERMANAGER_ADDRESS } from '../../constants'
 import { useIssuerManagerContract } from '../../hooks/useContract'
-import { useSingleContractMultipleData } from '../../state/multicall/hooks'
+import { useSingleContractMultipleData, useSingleCallResult } from '../../state/multicall/hooks'
 import { AddressZero } from '@ethersproject/constants'
 import { abi as IssuerBTCABI } from '../../constants/abis/IssuerBTC.json'
 import { abi as BtcMineTokenABI } from '../../constants/abis/BtcMineToken.json'
@@ -25,20 +26,26 @@ export interface Issuer {
 const ISSUERBTC_INTERFACE = new Interface(IssuerBTCABI)
 const BTCMINETOKEN_INTERFACE = new Interface(BtcMineTokenABI)
 
+export function useAllMineTokenInfo(address?: string) {
+  const issuerManagerContract = useIssuerManagerContract(ISSUERMANAGER_ADDRESS)
+  const result = useSingleCallResult(issuerManagerContract, 'getAllMineTokenInfo', [address])
+  console.log(result)
+}
+
 export function useHomeAllMineTokens(allMineTokenAddressess: string[], address?: string): MineToken[] {
   const balances = useMultipleContractSingleData(allMineTokenAddressess, BTCMINETOKEN_INTERFACE, 'balanceOf', [address])
   const symbols = useMultipleContractSingleData(allMineTokenAddressess, BTCMINETOKEN_INTERFACE, 'symbol')
   const comments = useMultipleContractSingleData(allMineTokenAddressess, BTCMINETOKEN_INTERFACE, 'comment')
   const rewards = useMultipleContractSingleData(allMineTokenAddressess, BTCMINETOKEN_INTERFACE, 'getReward',[address])
-  console.log(rewards)
   const buyAllMineTokens: MineToken[] = useMemo(() => {
     return allMineTokenAddressess
       .map((result, i) => {
         const symbol = symbols?.[i]?.result?.[0]
         const comment = comments?.[i]?.result?.[0]
         const balance = balances?.[i]?.result?.[0]
-        const accReward = rewards?.[i]?.result?.[0]
-        const waitReward = rewards?.[i]?.result?.[1]
+        const accReward = BigNumber.from(rewards?.[i]?.result?.[0] ? rewards?.[i]?.result?.[0] : 0)
+        const waitReward = BigNumber.from(rewards?.[i]?.result?.[1] ? rewards?.[i]?.result?.[1] : 0)
+        const reward = accReward.add(waitReward)
         return {
           decimals: 18,
           address: result,
@@ -46,7 +53,8 @@ export function useHomeAllMineTokens(allMineTokenAddressess: string[], address?:
           comment: comment,
           balance: balance,
           accReward: accReward,
-          waitReward: waitReward
+          waitReward: waitReward,
+          reward: reward
         }
       })
       .filter(address => {
@@ -106,7 +114,6 @@ export function useAllMineTokenAddressess(): string[] {
         }) ?? [],
     [issuerManagerContract, issuerAddressResults]
   )
-  console.log(issuerAddresss)
   const serialNumbers = useMultipleContractSingleData(issuerAddresss, ISSUERBTC_INTERFACE, 'serialNumber')
 
   const symbols = useMultipleContractSingleData(issuerAddresss, ISSUERBTC_INTERFACE, 'SYMBOL')
@@ -133,7 +140,6 @@ export function useAllMineTokenAddressess(): string[] {
         }),
     [serialNumbers, symbols]
   )
-  console.log(issuers)
   const results = useTest(issuers, ISSUERBTC_INTERFACE, 'getMineToken')
   return useMemo(() => {
     return results
@@ -222,6 +228,74 @@ export function buyInput(
   }
 }
 
+export function useMintInput(mintInput: {
+  AMOUNT: string
+}): {
+  inputError?: string
+} {
+  let inputError: string | undefined
+  if (!mintInput.AMOUNT) {
+    inputError = inputError ?? 'Enter an amount'
+  }
+  return {
+    inputError
+  }
+}
+export function useAddrInput(
+  addrInput: string
+): {
+  inputError?: string
+} {
+  let inputError: string | undefined
+  if (!isAddress(addrInput)) {
+    inputError = inputError ?? 'Enter an address'
+  }
+  return {
+    inputError
+  }
+}
+export function useNumericalInput(
+  valueInput: string
+): {
+  inputError?: string
+} {
+  let inputError: string | undefined
+  if (!valueInput) {
+    inputError = inputError ?? 'Enter an amount'
+  }
+  return {
+    inputError
+  }
+}
+export function useHostnameInput(
+  hostname: string
+): {
+  inputError?: string
+} {
+  let inputError: string | undefined
+  if (!hostname) {
+    inputError = 'Enter an name'
+  }
+  return {
+    inputError
+  }
+}
+
+export function useBlockinfoInput(blockinfoInput: {
+  timestamp: string
+  rewardPerTPerSecond: string
+}): {
+  inputError?: string
+} {
+  let inputError: string | undefined
+  if (!Number(blockinfoInput.timestamp) || !Number(blockinfoInput.rewardPerTPerSecond)) {
+    inputError = inputError ?? 'Enter an amount'
+  }
+
+  return {
+    inputError
+  }
+}
 export function useInput(issueInput: {
   COMMENT: string
   BTC: string
@@ -237,7 +311,6 @@ export function useInput(issueInput: {
   inputError?: string
 } {
   let inputError: string | undefined
-  console.log(issueInput)
   if (!issueInput.COMMENT || !issueInput.CURRENCY) {
     inputError = 'Enter an name'
   }

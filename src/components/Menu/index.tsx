@@ -1,11 +1,12 @@
 import React, { useRef } from 'react'
-import { Info, BookOpen, Code, PieChart, MessageCircle } from 'react-feather'
+import { Airplay, Info, BookOpen, Code, PieChart, MessageCircle } from 'react-feather'
 import styled from 'styled-components'
 import { ReactComponent as MenuIcon } from '../../assets/images/menu.svg'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
 import useToggle from '../../hooks/useToggle'
 
 import { ExternalLink } from '../../theme'
+import { NavLink } from 'react-router-dom'
 
 const StyledMenuIcon = styled(MenuIcon)`
   path {
@@ -52,7 +53,7 @@ const MenuFlyout = styled.span`
   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
     top:-15rem;
   `};
-  min-width: 8.125rem;
+  min-width: 9.125rem;
   background-color: ${({ theme }) => theme.bg3};
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04),
     0px 24px 32px rgba(0, 0, 0, 0.01);
@@ -65,6 +66,22 @@ const MenuFlyout = styled.span`
   top: 3rem;
   right: 0rem;
   z-index: 100;
+`
+const MenuItemNav = styled(NavLink)`
+  flex: 1;
+  padding: 0.5rem 0.5rem;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 500;
+  color: ${({ theme }) => theme.text2};
+  :hover {
+    color: ${({ theme }) => theme.text1};
+    cursor: pointer;
+    text-decoration: none;
+  }
+  > svg {
+    margin-right: 8px;
+  }
 `
 
 const MenuItem = styled(ExternalLink)`
@@ -97,6 +114,19 @@ export default function Menu() {
       </StyledMenuButton>
       {open && (
         <MenuFlyout>
+          {/*<MenuItem id="link" href="https://uniswap.org/">*/}
+          <MenuItemNav to="/issue">
+            <Airplay size={14} />
+            Issue
+          </MenuItemNav>
+          <MenuItemNav to="/owner">
+            <Airplay size={14} />
+            Owner
+          </MenuItemNav>
+          <MenuItemNav to="/multiowned">
+            <Airplay size={14} />
+            Multiowned
+          </MenuItemNav>
           <MenuItem id="link" href="https://uniswap.org/">
             <Info size={14} />
             About

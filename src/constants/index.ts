@@ -3,23 +3,32 @@ import { AbstractConnector } from '@web3-react/abstract-connector'
 
 import { fortmatic, injected, portis, walletconnect, walletlink } from '../connectors'
 //路由合约
-export const ROUTER_ADDRESS = '0xB96A0561612fcB10f8eb5888EE0eaD493Ce2c0a8'
+export const ROUTER_ADDRESS = '0x7377ebEC105a70CB9df769887e1fb7E260d22285'
 
 //工厂合约
-export const FACTORY_ADDRESS = '0xe29F01B5A7C93688d98B8Fe6dADfD561BebdB449'
+export const FACTORY_ADDRESS = '0x825a1a55c355dc2b6e89a0213bc9c4095708bc73'
 //weth合约
 export const WETH_ADDRESS = '0xc778417E063141139Fce010982780140Aa0cD5Ab'
 
-export const ISSUERMANAGER_ADDRESS = '0x4fc7f67b3168ee73a0ba37b1acae80d326ab94d1'
-export const WBTC_ADDRESS = '0xf176fC0409c5bcE7B6AE5C5cDd6B3C73a361AEda'
-export const BITCOINORACLE_ADDRESS = '0x698e69b57a5b9f887ae49c91d932d5a1977807c6'
-export const MINETOKENDEPLOYER_ADDRESS = '0x8a13d7486eba09aed075e4f47a4afd41acdec324'
-export const ISSUERDEPLOYER_ADDRESS = '0x7e3c8106013a9770707fd52737ae93fc9be992e4'
+//Multiowned合约
+export const MULTIOWNED_ADDRESS = '0x1c0ff8d087e444aac0074df21992a13a9be449cb'
+
+//核心合约
+export const ISSUERMANAGER_ADDRESS = '0x8Ebe78BB928090DC98A6c6C92f770F9cb1a74D58'
+//自己创建的wBTC erc20
+export const WBTC_ADDRESS = '0x4AF6Eb46D6f88917c38CC36F072A5A9c3682A418'
+export const BITCOINORACLE_ADDRESS = '0x6Ae12e91A0d1300E6aa0ba86C57c4731857Eae3e'
+export const MINETOKENDEPLOYER_ADDRESS = '0x994e9c5a0b6e11BE599FA2996BAc71bD13083bAF'
+//IssuerDeployer
+export const ISSUERDEPLOYER_ADDRESS = '0x2f870beC1578fdc0b3c973bA7f945aE9B91EDe6F'
 
 // a list of tokens by chain
 type ChainTokenList = {
   readonly [chainId in ChainId]: Token[]
 }
+
+//测试网DAI
+// export const DAI = new Token(ChainId.MAINNET, '0x9edD58deeeD974d855a565DAc03aD908aD3a1c3f', 18, 'DAI', 'Dai Stablecoin')
 
 export const DAI = new Token(ChainId.MAINNET, '0x6B175474E89094C44Da98b954EedeAC495271d0F', 18, 'DAI', 'Dai Stablecoin')
 export const USDC = new Token(ChainId.MAINNET, '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', 6, 'USDC', 'USD//C')

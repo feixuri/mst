@@ -13,7 +13,8 @@ export default function Buy() {
   const allMineTokenInfos = useBuyAllMineTokens(mineTokens)
   // console.log(allMineTokenInfos)
   const cardList = (allMineTokenInfos || []).map((item, index) => {
-    return item && item.buyEndTime && item.buyEndTime * 1000 > new Date().getTime() ? (
+    // return item && item.buyEndTime && item.buyEndTime * 1000 > new Date().getTime() ? (
+    return item && item.buyEndTime ? (
       <>
         <StyledCardWrapper key={index} style={{ padding: '10px' }}>
           <StyledCard>
@@ -47,7 +48,7 @@ export default function Buy() {
                   </span>
                 </StyledInsight>
                 <Spacer />
-                <CardButton disabled={false} text={'Buy'} to={`/apply/${item.address}/${item.symbol}`}></CardButton>
+                <CardButton disabled={false} text={'Buy'} to={`/apply/${item.address}/${item.symbol}`} />
               </StyledContent>
             </CardContent>
           </StyledCard>

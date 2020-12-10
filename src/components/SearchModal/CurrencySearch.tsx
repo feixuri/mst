@@ -86,18 +86,20 @@ export function CurrencySearch({
       .filter(s => s.length > 0)
     if (symbolMatch.length > 1) return sorted
 
-    const wBTC = new Token(3, '0xE8d60B58182333F1C69E027eEBc87610b007C7c6', 4, 'jd.com-mtBTC1', 'jd.com-mtBTC1')
-    const hBTC = new Token(3, '0xf176fC0409c5bcE7B6AE5C5cDd6B3C73a361AEda', 4, 'WBTC', 'WBTC')
-    const sBTC = new Token(3, '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599', 4, 'jd.com-mtBTC3', 'jd.com-mtBTC3')
-    return [wBTC, hBTC, sBTC]
-    // return [
-    //
-    //   ...(searchToken ? [searchToken] : []),
-    //   // sort any exact symbol matches first
-    //   ...sorted.filter(token => token.symbol?.toLowerCase() === symbolMatch[0]),
-    //   ...sorted.filter(token => token.symbol?.toLowerCase() !== symbolMatch[0])
-    // ]
+    // const wBTC = new Token(3, '0xD1dA6d939Eb71d29A5DC5F156bd8705d4cE84bCc', 4, 'jd.com-mtBTC1', 'jd.com-mtBTC1')
+    // const hBTC = new Token(3, '0x4AF6Eb46D6f88917c38CC36F072A5A9c3682A418', 4, 'WBTC', 'WBTC')
+    // const sBTC = new Token(3, '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599', 4, 'jd.com-mtBTC3', 'jd.com-mtBTC3')
+    // return [wBTC, hBTC, sBTC]
+    return [
+
+      ...(searchToken ? [searchToken] : []),
+      // sort any exact symbol matches first
+      ...sorted.filter(token => token.symbol?.toLowerCase() === symbolMatch[0]),
+      ...sorted.filter(token => token.symbol?.toLowerCase() !== symbolMatch[0])
+    ]
   }, [filteredTokens, searchQuery, searchToken, tokenComparator])
+
+  console.log(filteredSortedTokens)
 
   const handleCurrencySelect = useCallback(
     (currency: Currency) => {

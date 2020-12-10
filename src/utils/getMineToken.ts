@@ -1,5 +1,5 @@
 import { getBtcMineTokenContract } from './index'
-import { BigNumberish } from '@ethersproject/bignumber'
+import { BigNumber, BigNumberish } from '@ethersproject/bignumber'
 import moment from 'moment'
 
 export interface MineToken {
@@ -17,8 +17,9 @@ export interface MineToken {
   buySupply?: string
   usdt?: string
   balance?: any
-  accReward?: number
-  waitReward?: number
+  accReward?: BigNumber
+  waitReward?: BigNumber
+  reward?: BigNumber
 }
 export default async function getMineToken(
   token: string,

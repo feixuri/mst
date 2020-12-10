@@ -5,8 +5,10 @@ import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers'
 import { BigNumber } from '@ethersproject/bignumber'
 import { abi as IUniswapV2Router02ABI } from '@uniswap/v2-periphery/build/IUniswapV2Router02.json'
 import { abi as IssuerManagerV1ABI } from '../constants/abis/IssuerManagerV1.json'
+import { abi as BitcoinOracleABI} from '../constants/abis/BitcoinOracle.json'
 import { abi as IssuerBTCABI } from '../constants/abis/IssuerBTC.json'
 import { abi as BtcMineTokenABI } from '../constants/abis/BtcMineToken.json'
+import { abi as MultiownedABI } from '../constants/abis/Multiowned.json'
 import { ROUTER_ADDRESS, ISSUERMANAGER_ADDRESS } from '../constants'
 import { ChainId, JSBI, Percent, Token, CurrencyAmount, Currency, ETHER } from '@uniswap/sdk'
 import { TokenAddressMap } from '../state/lists/hooks'
@@ -56,7 +58,6 @@ export function shortenAddress(address: string, chars = 4): string {
 
 // add 10%
 export function calculateGasMargin(value: BigNumber): BigNumber {
-  console.log(value)
   return value.mul(BigNumber.from(10000).add(BigNumber.from(1000))).div(BigNumber.from(10000))
 }
 
@@ -100,8 +101,14 @@ export function getRouterContract(_: number, library: Web3Provider, account?: st
 export function getIssuerManagerContract(_: number, library: Web3Provider, account?: string): Contract {
   return getContract(ISSUERMANAGER_ADDRESS, IssuerManagerV1ABI, library, account)
 }
+export function getBitcoinOracleContract(address: string, library: Web3Provider, account?: string): Contract {
+  return getContract(address, BitcoinOracleABI, library, account)
+}
 export function getIssuerBTCContract(address: string, library: Web3Provider, account?: string): Contract {
   return getContract(address, IssuerBTCABI, library, account)
+}
+export function getMultiownedContract(address: string, library: Web3Provider, account?: string): Contract {
+  return getContract(address, MultiownedABI, library, account)
 }
 export function getBtcMineTokenContract(address: string, library: Web3Provider, account?: string): Contract {
   return getContract(address, BtcMineTokenABI, library, account)

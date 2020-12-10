@@ -60,7 +60,15 @@ export function IssueList({
   }, [])
 
   const cardList = (data || []).map(item => {
-    return item && item.minetoken ? <IssueCard key={item.minetoken} symbol={item.symbol} symbolAddress={item.minetoken} /> : null
+    return item && item.minetoken ? (
+      <IssueCard
+        key={item.minetoken}
+        symbol={item.symbol}
+        symbolAddress={item.minetoken}
+        tokens={tokens}
+        hostname={hostname}
+      />
+    ) : null
   })
   return (
     <>

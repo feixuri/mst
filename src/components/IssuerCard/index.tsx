@@ -11,7 +11,7 @@ import { useTotalSupply } from '../../data/TotalSupply'
 import { useActiveWeb3React } from '../../hooks'
 import { useTokenBalance } from '../../state/wallet/hooks'
 import { unwrappedToken } from '../../utils/wrappedCurrency'
-import { ButtonSecondary } from '../Button'
+import { ButtonPrimary, ButtonSecondary } from '../Button'
 
 import Card, { GreyCard } from '../Card'
 import { AutoColumn } from '../Column'
@@ -95,7 +95,7 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
                 </Text>
                 {token0Deposited ? (
                   <RowFixed>
-                    <Text color="#888D9B" fontSize={16} fontWeight={500} marginLeft={'6px'}>
+                    <Text color="#888D9B" fontSize={13} fontWeight={500} marginLeft={'6px'}>
                       {token0Deposited?.toSignificant(6)}
                     </Text>
                   </RowFixed>
@@ -128,7 +128,6 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
 export default function IssuerCard({ hostname, issuerAddress }: { hostname: string; issuerAddress: string }) {
   const border = 'test'
   const [showMore, setShowMore] = useState(false)
-
   return (
     <HoverCard border={border}>
       <AutoColumn gap="12px">
@@ -172,8 +171,18 @@ export default function IssuerCard({ hostname, issuerAddress }: { hostname: stri
     </HoverCard>
   )
 }
-export function IssueCard({ symbol = '', symbolAddress = '' }: { symbol?: string | ''; symbolAddress?: string | '' }) {
-  const border = 'test'
+
+export function IssueCard({
+  symbol = '',
+  symbolAddress = '',
+  tokens = '',
+  hostname = ''
+}: {
+  symbol?: string | ''
+  symbolAddress?: string | ''
+  tokens?: string | ''
+  hostname?: string | ''
+}) {
   const [showMore, setShowMore] = useState(false)
   const [issue, setIssue] = useState({
     COMMET: '',
@@ -188,7 +197,9 @@ export function IssueCard({ symbol = '', symbolAddress = '' }: { symbol?: string
     ENDTIME: '',
     TOTALSUPPLY: ''
   })
+  // const addTransaction = useTransactionAdder()
   const { account, library } = useWeb3React()
+
   const showIssue = function() {
     setShowMore(!showMore)
     if (account) {
@@ -216,7 +227,7 @@ export function IssueCard({ symbol = '', symbolAddress = '' }: { symbol?: string
     }
   }
   return (
-    <HoverCard border={border}>
+    <HoverCard>
       <AutoColumn gap="12px">
         <FixedHeightRow onClick={() => showIssue()} style={{ cursor: 'pointer' }}>
           <RowFixed>
@@ -236,110 +247,80 @@ export function IssueCard({ symbol = '', symbolAddress = '' }: { symbol?: string
           <AutoColumn gap="8px">
             <FixedHeightRow>
               <RowFixed>
-                <Text fontSize={16} fontWeight={500}>
+                <Text fontSize={13} fontWeight={500}>
                   totalSupply
                 </Text>
               </RowFixed>
               <RowFixed>
-                <Text fontSize={16} fontWeight={500} marginLeft={'6px'}>
+                <Text fontSize={13} fontWeight={500} marginLeft={'6px'}>
                   {issue.TOTALSUPPLY}
                 </Text>
               </RowFixed>
             </FixedHeightRow>
             <FixedHeightRow>
               <RowFixed>
-                <Text fontSize={16} fontWeight={500}>
+                <Text fontSize={13} fontWeight={500}>
                   startTime
                 </Text>
               </RowFixed>
               <RowFixed>
-                <Text fontSize={16} fontWeight={500} marginLeft={'6px'}>
+                <Text fontSize={13} fontWeight={500} marginLeft={'6px'}>
                   {issue.STARTTIME}
                 </Text>
               </RowFixed>
             </FixedHeightRow>
             <FixedHeightRow>
               <RowFixed>
-                <Text fontSize={16} fontWeight={500}>
+                <Text fontSize={13} fontWeight={500}>
                   endTime
                 </Text>
               </RowFixed>
               <RowFixed>
-                <Text fontSize={16} fontWeight={500} marginLeft={'6px'}>
+                <Text fontSize={13} fontWeight={500} marginLeft={'6px'}>
                   {issue.ENDTIME}
                 </Text>
               </RowFixed>
             </FixedHeightRow>
             <FixedHeightRow>
               <RowFixed>
-                <Text fontSize={16} fontWeight={500}>
+                <Text fontSize={13} fontWeight={500}>
                   buyStartTime
                 </Text>
               </RowFixed>
               <RowFixed>
-                <Text fontSize={16} fontWeight={500} marginLeft={'6px'}>
+                <Text fontSize={13} fontWeight={500} marginLeft={'6px'}>
                   {issue.BUYSTARTTIME}
                 </Text>
               </RowFixed>
             </FixedHeightRow>
             <FixedHeightRow>
               <RowFixed>
-                <Text fontSize={16} fontWeight={500}>
+                <Text fontSize={13} fontWeight={500}>
                   buyEndTime
                 </Text>
               </RowFixed>
               <RowFixed>
-                <Text fontSize={16} fontWeight={500} marginLeft={'6px'}>
+                <Text fontSize={13} fontWeight={500} marginLeft={'6px'}>
                   {issue.BUYENDTIME}
                 </Text>
               </RowFixed>
             </FixedHeightRow>
 
-            <RowBetween marginTop="10px">
-              <StyledInput className="token-amount-input" value={''} />
-              <ButtonSecondary as={Link} to={`/issue/${symbolAddress}`} width="100%">
-                增发
-              </ButtonSecondary>
-            </RowBetween>
+            <AutoColumn gap={'md'}>
+              <ButtonPrimary
+                id="join-pool-button"
+                as={Link}
+                style={{ padding: 16 }}
+                to={`/issueMint/${tokens}/${symbol}/${hostname}`}
+              >
+                <Text fontWeight={500} fontSize={20}>
+                  Mint
+                </Text>
+              </ButtonPrimary>
+            </AutoColumn>
           </AutoColumn>
         )}
       </AutoColumn>
     </HoverCard>
   )
 }
-
-const StyledInput = styled.input<{ error?: boolean; fontSize?: string; align?: string }>`
-  color: ${({ error, theme }) => (error ? theme.red1 : theme.text1)};
-  width: 100%;
-  position: relative;
-  font-weight: 500;
-  outline-style: none;
-  border: 1px solid #ccc;
-  flex: 1 1 auto;
-  background-color: ${({ theme }) => theme.bg1};
-  font-size: ${({ fontSize }) => fontSize ?? '24px'};
-  text-align: ${({ align }) => align && align};
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding: 5px;
-  margin-right: 10px;
-  -webkit-appearance: textfield;
-
-  ::-webkit-search-decoration {
-    -webkit-appearance: none;
-  }
-
-  [type='number'] {
-    -moz-appearance: textfield;
-  }
-
-  ::-webkit-outer-spin-button,
-  ::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-  }
-
-  ::placeholder {
-    color: ${({ theme }) => theme.text4};
-  }
-`

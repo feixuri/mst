@@ -178,7 +178,7 @@ const HeaderControls = styled.div`
   `};
 `
 const StyledText = styled.span`
-  width: 220px;
+  width: 250px;
   color: ${({ theme }) => theme.grey600};
   font-family: 'Reem Kufi', sans-serif;
   font-size: 20px;
@@ -223,7 +223,7 @@ export default function Header() {
               <img src={isDark ? LogoDark : Logo} alt="logo" height="32" style={{ marginTop: -4 }} />
             </UniIcon>
             <StyledText>
-              MistSwap
+              MinerSwap
               <MasterChefText>HashChampion</MasterChefText>
             </StyledText>
             {/*<TitleText>*/}
@@ -235,7 +235,7 @@ export default function Header() {
             <TitleMenuText to="/swap">Swap</TitleMenuText>
             {/*<TitleMenuText to="/pool">Pool</TitleMenuText>*/}
             <TitleMenuText to="/apply">Buy</TitleMenuText>
-            <TitleMenuText to="/issue">Issue</TitleMenuText>
+            {/*<TitleMenuText to="/issue">Issue</TitleMenuText>*/}
           </TitleMenu>
         </HeaderElement>
         <HeaderControls>

@@ -1,7 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e7452917-f67f-4c4d-8c0e-6cfe1e0935a2" name="Default Changelist" comment="" />
+    <list default="true" id="e7452917-f67f-4c4d-8c0e-6cfe1e0935a2" name="Default Changelist" comment="全新发布">
+      <change afterPath="$PROJECT_DIR$/src/components/IssuerCard/Adderss.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/constants/abis/BitcoinOracle.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/constants/abis/Multiowned.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/hooks/Trades_bak.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Issue/IssueMint.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Multiowned/AddOwner.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Multiowned/ChangeRequirement.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Multiowned/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Owner/BitcoinOracle.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Owner/BitcoinOracleSet.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Owner/FeeToSet.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Owner/RemoveIssuer.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Owner/UpdateBlockInfo.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Owner/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@uniswap/sdk/dist/constants.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@uniswap/sdk/dist/constants.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@uniswap/sdk/dist/sdk.cjs.development.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@uniswap/sdk/dist/sdk.cjs.development.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@uniswap/sdk/dist/sdk.cjs.development.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@uniswap/sdk/dist/sdk.cjs.development.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@uniswap/sdk/dist/sdk.cjs.production.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@uniswap/sdk/dist/sdk.cjs.production.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@uniswap/sdk/dist/sdk.cjs.production.min.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@uniswap/sdk/dist/sdk.cjs.production.min.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@uniswap/sdk/dist/sdk.esm.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@uniswap/sdk/dist/sdk.esm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@uniswap/sdk/dist/sdk.esm.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@uniswap/sdk/dist/sdk.esm.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@uniswap/v2-periphery/build/Combined-Json.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@uniswap/v2-periphery/build/Combined-Json.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@uniswap/v2-periphery/build/ExampleFlashSwap.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@uniswap/v2-periphery/build/ExampleFlashSwap.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@uniswap/v2-periphery/build/ExampleOracleSimple.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@uniswap/v2-periphery/build/ExampleOracleSimple.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@uniswap/v2-periphery/build/ExampleSlidingWindowOracle.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@uniswap/v2-periphery/build/ExampleSlidingWindowOracle.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@uniswap/v2-periphery/build/ExampleSwapToPrice.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@uniswap/v2-periphery/build/ExampleSwapToPrice.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@uniswap/v2-periphery/build/IUniswapV2Router02.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@uniswap/v2-periphery/build/IUniswapV2Router02.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@uniswap/v2-periphery/build/UniswapV2Router01.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@uniswap/v2-periphery/build/UniswapV2Router01.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@uniswap/v2-periphery/build/UniswapV2Router02.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@uniswap/v2-periphery/build/UniswapV2Router02.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/IssuerCard/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/IssuerCard/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Menu/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Menu/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SearchModal/CurrencyBtcSearch.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchModal/CurrencyBtcSearch.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SearchModal/CurrencySearch.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchModal/CurrencySearch.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/swap/TradePrice.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/swap/TradePrice.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constants/abis/IssuerManagerV1.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/abis/IssuerManagerV1.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constants/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constants/lists.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/lists.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/Trades.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/Trades.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/AddLiquidity/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/AddLiquidity/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Apply/applydetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Apply/applydetails.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Apply/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Apply/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Home/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Home/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Issue/AddIssue.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Issue/AddIssue.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Issue/IssueList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Issue/IssueList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Issue/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Issue/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Swap/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Swap/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Swap/redirects.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Swap/redirects.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/state/issue/hooks.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/issue/hooks.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/state/lists/hooks.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/lists/hooks.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/state/swap/hooks.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/swap/hooks.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/getMineToken.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/getMineToken.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/index.ts" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +97,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="js.last.introduce.type" value="CONST" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/SearchModal" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/pages/Owner" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -62,11 +118,11 @@
       <recent name="$PROJECT_DIR$/src/pages/Issue" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/pages/Owner" />
+      <recent name="$PROJECT_DIR$/src/components/IssuerCard" />
+      <recent name="$PROJECT_DIR$/src/hooks" />
       <recent name="$PROJECT_DIR$/src/components/SearchModal" />
       <recent name="$PROJECT_DIR$/src/state/issue" />
-      <recent name="$PROJECT_DIR$/src/pages/Issue" />
-      <recent name="$PROJECT_DIR$/src/components" />
-      <recent name="$PROJECT_DIR$/src/components/CurrencyInputPanel" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -81,7 +137,21 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Jest.uriToHttp.returns .eth.link for ens names">
+    <configuration name="uriToHttp.returns .eth.link for ens names" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/src/utils/uriToHttp.test.ts" />
+      <test-names>
+        <test-name value="uriToHttp" />
+        <test-name value="returns .eth.link for ens names" />
+      </test-names>
+      <method v="2" />
+    </configuration>
     <configuration name="utils" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -97,6 +167,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Jest.uriToHttp.returns .eth.link for ens names" />
         <item itemvalue="Jest.utils" />
       </list>
     </recent_temporary>
@@ -132,7 +203,11 @@
       <workItem from="1605013499197" duration="586000" />
       <workItem from="1605059915497" duration="6984000" />
       <workItem from="1605096412239" duration="8000" />
-      <workItem from="1605096454509" duration="2001000" />
+      <workItem from="1605096454509" duration="14032000" />
+      <workItem from="1605169939908" duration="10035000" />
+      <workItem from="1605806102282" duration="16000" />
+      <workItem from="1607090528364" duration="18140000" />
+      <workItem from="1607417052481" duration="3595000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1600975944893</created>
@@ -183,7 +258,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605099543996</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="全新发布">
+      <created>1605100064523</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1605100064523</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

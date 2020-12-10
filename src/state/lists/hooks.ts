@@ -3,6 +3,7 @@ import { Tags, TokenInfo, TokenList } from '@uniswap/token-lists'
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { AppState } from '../index'
+// import uriToHttp from '../../utils/uriToHttp'
 
 type TagDetails = Tags[keyof Tags]
 export interface TagInfo extends TagDetails {
@@ -86,11 +87,12 @@ export function useTokenList(url: string | undefined): TokenAddressMap {
 }
 
 export function useSelectedListUrl(): string | undefined {
-  return 'https://app.tryroll.com/tokens.json'
-  // return useSelector<AppState, AppState['lists']['selectedListUrl']>(state => state.lists.selectedListUrl)
+  // return 'https://app.tryroll.com/tokens.json'
+  return useSelector<AppState, AppState['lists']['selectedListUrl']>(state => state.lists.selectedListUrl)
 }
 
 export function useSelectedTokenList(): TokenAddressMap {
+  // console.log(uriToHttp('tokens.uniswap.eth'))
   return useTokenList(useSelectedListUrl())
 }
 

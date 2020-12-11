@@ -61,18 +61,22 @@ export default function Home() {
   }
   return (
     <>
-      <PageHeader
-        icon={<img src={chef} height={120} alt="" />}
-        title="Excavator is ready"
-        subtitle=""
-      />
       {/*<Container>*/}
       {/*  <Balances />*/}
       {/*</Container>*/}
-      {/*<StyledInfo>*/}
-      {/*  🏆<b>Pro Tip</b>: MST-ETH SLP token pool yields 10.0x more token rewards per block.*/}
-      {/*</StyledInfo>*/}
+
+      {tokenCard.length === 0 && (
+        <PageHeader
+          icon={<img src={chef} height={120} alt="" />}
+          title="Excavator is ready"
+          subtitle="Please move to “BUY” or “SWAP” to purchase token"
+        />
+      )}
+      {tokenCard.length > 0 && (
+        <PageHeader icon={<img src={chef} height={120} alt="" />} title="Excavator is ready" subtitle="" />
+      )}
       <>{tokenCard}</>
+      {/*<>{}</>*/}
     </>
   )
 }
@@ -90,12 +94,7 @@ const ColumnHome = styled.div`
   justify-items: center;
   max-width: 640px;
   width: 100%;
-  // background: ${({ theme }) => theme.bg1};
-  // box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04),
-  //   0px 24px 32px rgba(0, 0, 0, 0.01);
-  // background:linear-gradient(45deg, rgb(255, 0, 0) 0%, rgb(255, 154, 0) 10%, rgb(208, 222, 33) 20%, rgb(79, 220, 74) 30%, rgb(63, 218, 216) 40%, rgb(47, 201, 226) 50%, rgb(28, 127, 238) 60%, rgb(95, 21, 242) 70%, rgb(186, 12, 248) 80%, rgb(251, 7, 217) 90%, rgb(255, 0, 0) 100%) 0% 0% / 300% 300%;
   border-radius: 10px;
-  // margin-bottom: 1rem;
   padding: 8px 16px;
 `
 

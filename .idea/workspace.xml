@@ -1,21 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e7452917-f67f-4c4d-8c0e-6cfe1e0935a2" name="Default Changelist" comment="swap">
+    <list default="true" id="e7452917-f67f-4c4d-8c0e-6cfe1e0935a2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/CurrencyInputPanel/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CurrencyInputPanel/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/IssuerCard/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/IssuerCard/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Apply/applydetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Apply/applydetails.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Apply/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Apply/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Home/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Home/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Issue/AddIssue.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Issue/AddIssue.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Issue/IssueList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Issue/IssueList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Issue/RegistIssuer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Issue/RegistIssuer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Issue/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Issue/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Multiowned/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Multiowned/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Owner/BitcoinOracle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Owner/BitcoinOracle.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Owner/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Owner/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/state/issue/hooks.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/issue/hooks.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -166,7 +154,7 @@
       <workItem from="1605169939908" duration="10035000" />
       <workItem from="1605806102282" duration="16000" />
       <workItem from="1607090528364" duration="18140000" />
-      <workItem from="1607417052481" duration="14727000" />
+      <workItem from="1607417052481" duration="16295000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1600975944893</created>
@@ -238,7 +226,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607582653522</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Modification of explanatory text">
+      <created>1607678050867</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1607678050867</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -272,7 +267,8 @@
     <MESSAGE value="20201010" />
     <MESSAGE value="全新发布" />
     <MESSAGE value="swap" />
-    <option name="LAST_COMMIT_MESSAGE" value="swap" />
+    <MESSAGE value="Modification of explanatory text" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modification of explanatory text" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -281,6 +277,12 @@
           <url>file://$PROJECT_DIR$/src/state/wallet/hooks.ts</url>
           <line>59</line>
           <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/pages/Home/index.tsx</url>
+          <line>65</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

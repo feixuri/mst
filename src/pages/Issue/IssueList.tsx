@@ -5,8 +5,7 @@ import { Link, RouteComponentProps } from 'react-router-dom'
 import { Text } from 'rebass'
 import { AutoColumn } from '../../components/Column'
 import { AutoRow, RowBetween } from '../../components/Row'
-import Question from '../../components/QuestionHelper'
-import QuestionHelper from '../../components/QuestionHelper'
+// import Question from '../../components/QuestionHelper'
 import { ThemeContext } from 'styled-components'
 import { IssueCard } from '../../components/IssuerCard'
 import { BackArrow, TYPE } from '../../theme'
@@ -78,27 +77,22 @@ export function IssueList({
             <BackArrow to="/issue" />
             <TYPE.mediumHeader>{hostname}</TYPE.mediumHeader>
             <div>
-              <QuestionHelper text="说明文字" />
+              {/*<QuestionHelper text="说明文字" />*/}
             </div>
           </AutoRow>
           <ButtonPrimary id="join-pool-button" as={Link} style={{ padding: 16 }} to={`/issue/${tokens}/${hostname}`}>
             <Text fontWeight={500} fontSize={20}>
-              Add New Issue
+              Issued New Token
             </Text>
           </ButtonPrimary>
           <AutoColumn gap="12px" style={{ width: '100%' }}>
             <RowBetween padding={'0 8px'}>
               <Text color={theme.text1} fontWeight={500}>
-                Your Issues
+                Your Minetokens
               </Text>
-              <Question text="说明文字." />
+              {/*<Question text="说明文字." />*/}
             </RowBetween>
             <>{cardList}</>
-            {/*<LightCard padding="40px">*/}
-            {/*  <TYPE.body color={theme.text3} textAlign="center">*/}
-            {/*    No issuer found.*/}
-            {/*  </TYPE.body>*/}
-            {/*</LightCard>*/}
           </AutoColumn>
         </AutoColumn>
       </AppBody>

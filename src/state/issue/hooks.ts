@@ -353,10 +353,9 @@ export function useDerivedIssuerInfo(
     inputError = 'Connect Wallet'
   }
   if (!typedValue) {
-    inputError = inputError ?? 'Enter an name'
+    inputError = inputError ?? 'Enter hostname'
   }
 
-  // inputError = 'hostname already exist!'
   return {
     inputError
   }

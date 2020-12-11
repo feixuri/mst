@@ -15,7 +15,6 @@ import { useWalletModalToggle } from '../../state/application/hooks'
 import { useInput } from '../../state/issue/hooks'
 import { TransactionResponse } from '@ethersproject/abstract-provider'
 import ReactGA from 'react-ga'
-import QuestionHelper from '../../components/QuestionHelper'
 import { RouteComponentProps } from 'react-router'
 import {
   TextInputPanel,
@@ -211,54 +210,59 @@ export function AddIssue({
           <AutoColumn gap="20px">
             <AutoRow style={{ alignItems: 'center', justifyContent: 'space-between' }} gap="8px">
               <BackArrow to={`/issues/${tokens}/${hostname}`} />
-              <TYPE.mediumHeader>Issue</TYPE.mediumHeader>
+              <TYPE.mediumHeader>Add New Minetoken</TYPE.mediumHeader>
               <div>
-                <QuestionHelper text="说明文字" />
+                {/*<QuestionHelper text="说明文字" />*/}
               </div>
             </AutoRow>
             <AutoColumn gap={'md'}>
               <TextInputPanel
-                label={'comment'}
+                label={'Product intro'}
                 value={issueInput.COMMENT}
                 id="add-issue-input-comment"
                 onUserInput={onCommentInput}
+                question={'The content length cannot exceed 64 bits'}
               />
               <TextInputPanel
-                label={'currency'}
+                label={'Currency'}
                 value={issueInput.CURRENCY}
                 id="add-issue-input-currency"
                 onUserInput={onCurrencyInput}
               />
               <CurrencyBtcInputPanel
-                label={'btc'}
+                label={'Choose the type of BTC'}
                 value={issueInput.BTC}
                 id="add-issue-input-currency"
                 currency={currency}
                 onCurrencySelect={handleInputSelect}
                 onUserInput={onBtcInput}
+                question={
+                  'The income of maintoken is settled by what kind of BTC mapping assets on the Ethereum chain.'
+                }
               />
               <NumericalInputPanel
-                label={'buyPrice'}
+                label={'BuyPrice'}
                 value={issueInput.BUYPRICE}
                 id="add-issue-input-buyPrice"
                 onUserInput={onBuyPriceInput}
               />
               <NumericalInputPanel
-                label={'buyTotalSupply'}
+                label={'BuyTotalSupply'}
                 value={issueInput.BUYTOTALSUPPLY}
                 id="add-issue-input-buyTotalSupply"
                 onUserInput={onBuyTotalSupply}
               />
               <NumericalInputPanel
-                label={'preMintNumber'}
+                label={'The number of pre-issued minetoken'}
                 value={issueInput.PREMINTNUMBER}
                 id="add-issue-input-preMintNumber"
                 onUserInput={onPreMintNumber}
+                question={'It can be issued at any time in the future'}
               />
-              <TimeInputPanel onUserInput={onBuyStartTime} label={'buyStartTime'} />
-              <TimeInputPanel onUserInput={onBuyEndTime} label={'buyEndTime'} />
-              <TimeInputPanel onUserInput={onStartTime} label={'startTime'} />
-              <TimeInputPanel onUserInput={onEndTime} label={'endTime'} />
+              <TimeInputPanel onUserInput={onBuyStartTime} label={'BuyStartTime'} />
+              <TimeInputPanel onUserInput={onBuyEndTime} label={'BuyEndTime'} />
+              <TimeInputPanel onUserInput={onStartTime} label={'StartTime'} />
+              <TimeInputPanel onUserInput={onEndTime} label={'EndTime'} />
             </AutoColumn>
             {!account ? (
               <ButtonLight onClick={toggleWalletModal}>Connect Wallet</ButtonLight>

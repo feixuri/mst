@@ -32,15 +32,16 @@ export default function Buy() {
                   <StyledDetail>{item.comment} </StyledDetail>
                 </StyledDetails>
                 <StyledInsight>
-                  <span>Buy StartTime</span>
+                  <span>Starting time of purchase</span>
                   <span>
                     {item.buyStartTime
                       ? moment(parseInt(item.buyStartTime.toString()) * 1000).format('YYYY-MM-DD HH:mm:ss')
                       : '-'}
                   </span>
                 </StyledInsight>
-                <StyledInsight>
-                  <span>Buy EndTime</span>
+                {/*style={{ minHeight: 200, justifyContent: 'center', alignItems: 'center' }}>*/}
+                <StyledInsight style={{ borderTop: 'solid 1px #e2d6cf', borderRadius: 'unset' }}>
+                  <span>End time of purchase</span>
                   <span>
                     {item.buyEndTime
                       ? moment(parseInt(item.buyEndTime.toString()) * 1000).format('YYYY-MM-DD HH:mm:ss')

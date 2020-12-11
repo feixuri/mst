@@ -4,10 +4,10 @@ import AppBody from '../AppBody'
 import { AddRemoveTabs } from '../../components/NavigationTabs'
 import { Dots, Wrapper } from '../Pool/styleds'
 import { AutoColumn, ColumnCenter } from '../../components/Column'
-import { BottomGrouping } from '../../components/swap/styleds'
+import { BottomGrouping, TruncatedText } from '../../components/swap/styleds'
 import { ButtonError, ButtonPrimary } from '../../components/Button'
 import { Text } from 'rebass'
-import { RowBetween, RowFixed, RowFlat } from '../../components/Row'
+import { RowBetween, RowFixed } from '../../components/Row'
 import styled, { ThemeContext } from 'styled-components'
 import { TYPE } from '../../theme'
 import EthereumLogo from '../../assets/images/ethereum-logo.png'
@@ -16,7 +16,6 @@ import { buyInput } from '../../state/issue/hooks'
 import { useIsExpertMode } from '../../state/user/hooks'
 import TransactionConfirmationModal, { ConfirmationModalContent } from '../../components/TransactionConfirmationModal'
 import { ConfirmRegisterModalBottom } from '../Issue/ConfirmRegisterModalBottom'
-import { LightCard } from '../../components/Card'
 import ReactGA from 'react-ga'
 import { getBtcMineTokenContract } from '../../utils'
 import { TransactionResponse } from '@ethersproject/abstract-provider'
@@ -30,11 +29,13 @@ import { CurrencyAmount } from '@uniswap/sdk'
 import { tryParseAmount } from '../../state/swap/hooks'
 import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback'
 import { useTransactionAdder } from '../../state/transactions/hooks'
+import { ArrowDown } from 'react-feather'
+import { BigNumber } from '@ethersproject/bignumber'
 export function ApplyDetails({
   match: {
     params: { token, symbol }
   }
-}: RouteComponentProps<{ token: string,symbol:string }>) {
+}: RouteComponentProps<{ token: string; symbol: string }>) {
   const { account, chainId, library } = useWeb3React()
   const [buyAmount, setBuyAmount] = useState<string>('')
   const expertMode = useIsExpertMode()
@@ -80,10 +81,8 @@ export function ApplyDetails({
         setTxHash(response.hash)
 
         addTransaction(response, {
-          summary: 'Buy ' + symbol + ' Puy ' +
-            independentAmount?.toSignificant(3)
+          summary: 'Buy ' + symbol + ' Puy ' + independentAmount?.toSignificant(3)
         })
-        console.log(response)
       })
       .catch((error: { code: number }) => {
         // setShowConfirm(true)
@@ -101,19 +100,44 @@ export function ApplyDetails({
     }
     setTxHash('')
   }, ['', txHash])
-
+  const theme = useContext(ThemeContext)
   const modalHeader = () => {
     return (
-      <AutoColumn gap="20px">
-        <LightCard mt="20px" borderRadius="20px">
-          <RowFlat>
-            <Text lineHeight="20px" marginRight={10}></Text>
-          </RowFlat>
-        </LightCard>
+      <AutoColumn gap={'md'} style={{ marginTop: '20px' }}>
+        <RowBetween align="flex-end">
+          <RowFixed gap={'0px'}>
+            {/*<CurrencyLogo currency={trade.inputAmount.currency} size={'24px'} style={{ marginRight: '12px' }} />*/}
+            <TruncatedText fontSize={18} fontWeight={500}>
+              {BigNumber.from(buyAmount)
+                .mul(BigNumber.from(mineToken && mineToken.buyPrice ? mineToken.buyPrice : 0))
+                .toString()}
+            </TruncatedText>
+          </RowFixed>
+          <RowFixed gap={'0px'}>
+            <Text fontSize={18} fontWeight={500} style={{ marginLeft: '10px' }}>
+              {currencyPay ? currencyPay.symbol : ''}
+            </Text>
+          </RowFixed>
+        </RowBetween>
+        <RowFixed>
+          <ArrowDown size="16" color={theme.text2} style={{ marginLeft: '4px', minWidth: '16px' }} />
+        </RowFixed>
+        <RowBetween align="flex-end">
+          <RowFixed gap={'0px'}>
+            {/*<CurrencyLogo currency={trade.inputAmount.currency} size={'24px'} style={{ marginRight: '12px' }} />*/}
+            <TruncatedText fontSize={18} fontWeight={500} color={theme.primary1}>
+              {buyAmount}
+            </TruncatedText>
+          </RowFixed>
+          <RowFixed gap={'0px'}>
+            <Text fontSize={18} fontWeight={500} style={{ marginLeft: '10px' }}>
+              {symbol}
+            </Text>
+          </RowFixed>
+        </RowBetween>
       </AutoColumn>
     )
   }
-  const theme = useContext(ThemeContext)
   return (
     <>
       <AppBody>
@@ -126,7 +150,7 @@ export function ApplyDetails({
             hash={txHash}
             content={() => (
               <ConfirmationModalContent
-                title={'You are Buy'}
+                title={'Confirm Buy'}
                 onDismiss={handleDismissConfirmation}
                 topContent={modalHeader}
                 bottomContent={modalBottom}
@@ -149,7 +173,7 @@ export function ApplyDetails({
               <RowBetween>
                 <RowFixed>
                   <TYPE.black fontSize={14} fontWeight={400} color={theme.text6}>
-                    合约地址
+                    Contract address
                   </TYPE.black>
                 </RowFixed>
                 <TYPE.black fontSize={14} color={theme.text6}>
@@ -159,7 +183,7 @@ export function ApplyDetails({
               <RowBetween>
                 <RowFixed>
                   <TYPE.black fontSize={14} fontWeight={400} color={theme.text6}>
-                    buyTotalSupply
+                    BuyTotalSupply
                   </TYPE.black>
                 </RowFixed>
                 <TYPE.black fontSize={14} color={theme.text6}>
@@ -171,7 +195,7 @@ export function ApplyDetails({
               <RowBetween>
                 <RowFixed>
                   <TYPE.black fontSize={14} fontWeight={400} color={theme.text6}>
-                    buySupply
+                    BuySupply
                   </TYPE.black>
                 </RowFixed>
                 <TYPE.black fontSize={14} color={theme.text6}>
@@ -181,7 +205,7 @@ export function ApplyDetails({
               <RowBetween>
                 <RowFixed>
                   <TYPE.black fontSize={14} fontWeight={400} color={theme.text6}>
-                    收益开始时间
+                    Starting time of Revenue
                   </TYPE.black>
                 </RowFixed>
                 <TYPE.black fontSize={14} color={theme.text6}>
@@ -191,7 +215,7 @@ export function ApplyDetails({
               <RowBetween>
                 <RowFixed>
                   <TYPE.black fontSize={14} fontWeight={400} color={theme.text6}>
-                    收益结束时间
+                    End time of Revenue
                   </TYPE.black>
                 </RowFixed>
                 <TYPE.black fontSize={14} color={theme.text6}>
@@ -201,7 +225,7 @@ export function ApplyDetails({
               <RowBetween>
                 <RowFixed>
                   <TYPE.black fontSize={14} fontWeight={400} color={theme.text6}>
-                    认购价格
+                    Subscription price
                   </TYPE.black>
                 </RowFixed>
                 <TYPE.black fontSize={14} color={theme.text6}>
@@ -211,7 +235,7 @@ export function ApplyDetails({
               <RowBetween>
                 <RowFixed>
                   <TYPE.black fontSize={14} fontWeight={400} color={theme.text6}>
-                    buyStartTime
+                    BuyStartTime
                   </TYPE.black>
                 </RowFixed>
                 <TYPE.black fontSize={14} color={theme.text6}>
@@ -221,7 +245,7 @@ export function ApplyDetails({
               <RowBetween>
                 <RowFixed>
                   <TYPE.black fontSize={14} fontWeight={400} color={theme.text6}>
-                    buyEndTime
+                    BuyEndTime
                   </TYPE.black>
                 </RowFixed>
                 <TYPE.black fontSize={14} color={theme.text6}>
@@ -231,7 +255,7 @@ export function ApplyDetails({
               <RowBetween>
                 <RowFixed>
                   <TYPE.black fontSize={14} fontWeight={400} color={theme.text6}>
-                    payToke address
+                    PayToken address
                   </TYPE.black>
                 </RowFixed>
                 <TYPE.black fontSize={14} color={theme.text6}>
@@ -241,7 +265,7 @@ export function ApplyDetails({
               <RowBetween>
                 <RowFixed>
                   <TYPE.black fontSize={14} fontWeight={400} color={theme.text6}>
-                    payToke symbol
+                    PayToken symbol
                   </TYPE.black>
                 </RowFixed>
                 <TYPE.black fontSize={14} color={theme.text6}>
@@ -255,14 +279,13 @@ export function ApplyDetails({
                   </TYPE.black>
                 </RowFixed>
                 <TYPE.black fontSize={14} color={theme.text6}>
-                  {/*{currencyPayBalance}*/}
                   {currencyPayBalance?.toSignificant(6)}
                 </TYPE.black>
               </RowBetween>
             </AutoColumn>
             <AutoColumn gap={'md'}>
               <NumericalInputPanel
-                label={'buyAmount'}
+                label={'BuyAmount'}
                 value={buyAmount}
                 id="add-issue-input-buyAmount"
                 onUserInput={onBuyAmount}

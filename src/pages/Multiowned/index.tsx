@@ -50,7 +50,7 @@ export default function Owner() {
               <RowBetween>
                 <RowFixed>
                   <TYPE.black fontSize={14} fontWeight={400} color={theme.text6}>
-                    合约地址
+                    Contract address
                   </TYPE.black>
                 </RowFixed>
                 <TYPE.black fontSize={14} color={theme.text6}>

@@ -10,13 +10,11 @@ import CardButton from '../../components/CardButton'
 import { BigNumber } from '@ethersproject/bignumber'
 import { useActiveWeb3React } from '../../hooks'
 import { getBtcMineTokenContract } from '../../utils'
-// import { TransactionResponse } from '@ethersproject/abstract-provider'
 export default function Home() {
   const { account, chainId, library } = useActiveWeb3React()
   useAllMineTokenInfo(account ?? undefined)
   const mineTokens = useAllMineTokenAddressess()
   const homeAllMineTokens = useHomeAllMineTokens(mineTokens, account ?? undefined)
-  // console.log(homeAllMineTokens)
 
   const tokenCard = (homeAllMineTokens || []).map((item, index) => {
     return item && item.balance && item.balance > 0 ? (
@@ -28,10 +26,6 @@ export default function Home() {
               <Value value={item.balance ? formatUnits(item.balance.toString(), 18).toString() : 0} />
             </BalSumCard>
           </CardHome>
-          {/*<Footnote>*/}
-          {/*  Balance*/}
-          {/*  <FootnoteValue>{item.accReward ? formatUnits(item.accReward.toString(), 18).toString() : 0}</FootnoteValue>*/}
-          {/*</Footnote>*/}
           <Footnote>
             Reward
             <FootnoteValue>{item.reward ? formatUnits(item.reward.toString(), 18).toString() : 0}</FootnoteValue>
@@ -52,14 +46,9 @@ export default function Home() {
   })
 
   const onHarvest = function(reward: BigNumber | undefined, address: string | undefined) {
-    console.log(reward?reward.toString():'')
+    console.log(reward ? reward.toString() : '')
     if (!chainId || !library || !account) return
     const btcMineToken = getBtcMineTokenContract(address ? address : '', library, account)
-
-    // let method: (...args: any) => Promise<TransactionResponse>,
-    //   args: Array<string | string[] | number>,
-    //   value: BigNumber | null
-
     const method = btcMineToken.harvest
     const args = [reward ? reward.toString() : '']
     const value = null
@@ -74,8 +63,8 @@ export default function Home() {
     <>
       <PageHeader
         icon={<img src={chef} height={120} alt="" />}
-        title="MasterChef is Ready"
-        subtitle="Stake MinerSwap LP tokens to claim your very own great MST!"
+        title="Excavator is ready"
+        subtitle=""
       />
       {/*<Container>*/}
       {/*  <Balances />*/}
@@ -130,13 +119,7 @@ const CardHome = styled.div`
   padding: 1rem;
   z-index: 1;
 `
-// const BalCard = styled.div`
-//   text-align: center;
-//   box-sizing: border-box;
-//   margin: 0px;
-//   min-width: 0px;
-//   border-right: solid 1px ${({ theme }) => theme.grey300};
-// `
+
 const BalSumCard = styled.div`
   text-align: center;
   box-sizing: border-box;

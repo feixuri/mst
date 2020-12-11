@@ -162,7 +162,7 @@ export default function IssuerCard({ hostname, issuerAddress }: { hostname: stri
 
             <RowBetween marginTop="10px">
               <ButtonSecondary as={Link} to={`/issues/${issuerAddress}/${hostname}`} width="100%">
-                View issuer information
+                View hostname information
               </ButtonSecondary>
             </RowBetween>
           </AutoColumn>

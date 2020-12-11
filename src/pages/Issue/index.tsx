@@ -10,11 +10,9 @@ import { ThemeContext } from 'styled-components'
 import IssuerCard from '../../components/IssuerCard'
 import { getIssuerManagerContract } from '../../utils'
 import { useWeb3React } from '@web3-react/core'
-// import ERC20_INTERFACE from '../../constants/abis/erc20'
 
 export default function IssueList() {
   const theme = useContext(ThemeContext)
-
   const [data, setData] = useState([
     {
       hostname: '',
@@ -59,23 +57,21 @@ export default function IssueList() {
       <IssuerCard key={item.issuerAddress} hostname={item.hostname} issuerAddress={item.issuerAddress} />
     ) : null
   })
-  //获取ERC20 代币余额
-  // const balances = useMultipleContractSingleData(validatedTokenAddresses, ERC20_INTERFACE, 'balanceOf', [address])
   return (
     <>
       <AppBody>
         <AutoColumn gap="lg" justify="center">
           <ButtonPrimary id="join-pool-button" as={Link} style={{ padding: 16 }} to="/registIssuer">
             <Text fontWeight={500} fontSize={20}>
-              Add New Issuer
+              Add New Hostname
             </Text>
           </ButtonPrimary>
           <AutoColumn gap="12px" style={{ width: '100%' }}>
             <RowBetween padding={'0 8px'}>
               <Text color={theme.text1} fontWeight={500}>
-                Your Issuers
+                Your Hostnames
               </Text>
-              <Question text="说明文字." />
+              <Question text="A list of hostnames issued by you as the issuer" />
             </RowBetween>
             <>{cardList}</>
           </AutoColumn>

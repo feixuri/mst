@@ -30,19 +30,13 @@ export function RegistIssuer() {
   const inputHostname = ''
   const { inputError } = useDerivedIssuerInfo(inputHostname ?? undefined)
   const isValid = !inputError
-  // console.log(Math.floor(new Date().getTime() / 1000))
   const expertMode = useIsExpertMode()
   const toggleWalletModal = useWalletModalToggle()
   const { account, chainId, library } = useWeb3React()
-  // console.log(account)
-  // const { onFieldAInput, onFieldBInput } = useMintActionHandlers(noLiquidity)
   const [showConfirm, setShowConfirm] = useState<boolean>(false)
   const [showErrorInfo, setShowErrorInfo] = useState<boolean>(false)
   const [attemptingTxn, setAttemptingTxn] = useState<boolean>(false) // clicked confirm
 
-  // txn values
-  // const [deadline] = useUserDeadline() // custom from users settings
-  // const [allowedSlippage] = useUserSlippageTolerance() // custom from users
   const [txHash, setTxHash] = useState<string>('')
   const [hostname, setHostname] = useState<string>('')
 
@@ -58,7 +52,6 @@ export function RegistIssuer() {
     const issuerManager = getIssuerManagerContract(chainId, library, account)
 
     const issuerAddress = issuerManager.getIssuerAddress
-    // const estimate = issuerManager.estimateGas.registIssuerBTC
     setAttemptingTxn(true)
     await issuerAddress(hostname.toString()).then((address: any) => {
       if (address[0] != AddressZero) {
@@ -89,7 +82,6 @@ export function RegistIssuer() {
       }
     })
   }
-
   const modalHeader = () => {
     return (
       <AutoColumn gap="20px">
@@ -97,13 +89,7 @@ export function RegistIssuer() {
           <RowFlat>
             <Text lineHeight="20px" marginRight={10}>
               {hostname}
-              {/*{currencies[Field.CURRENCY_A]?.symbol + '/' + currencies[Field.CURRENCY_B]?.symbol}*/}
             </Text>
-            {/*<DoubleCurrencyLogo*/}
-            {/*  currency0={currencies[Field.CURRENCY_A]}*/}
-            {/*  currency1={currencies[Field.CURRENCY_B]}*/}
-            {/*  size={30}*/}
-            {/*/>*/}
           </RowFlat>
         </LightCard>
       </AutoColumn>
@@ -156,9 +142,9 @@ export function RegistIssuer() {
           <AutoColumn gap="20px">
             <AutoRow style={{ alignItems: 'center', justifyContent: 'space-between' }} gap="8px">
               <BackArrow to="/issue" />
-              <TYPE.mediumHeader>Issue Registered</TYPE.mediumHeader>
+              <TYPE.mediumHeader>Add New Hostname</TYPE.mediumHeader>
               <div>
-                <QuestionHelper text="说明文字" />
+                <QuestionHelper text="Enter the hostname you want to register, and it cannot be repeated." />
               </div>
             </AutoRow>
             <AutoColumn gap={'md'}>
